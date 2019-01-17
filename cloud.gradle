@@ -34,6 +34,7 @@ configurations.all {
 ext {
     p3c = "1.3.6"
     pmdVersion = '5.5.2'
+    springCloudVersion = 'Greenwich.M2'
 }
 
 pmd {
@@ -71,11 +72,6 @@ tasks.withType(FindBugs) {
     }
 }
 
-task "createDirs" << {
-    sourceSets*.java.srcDirs*.each { it.mkdirs() }
-    sourceSets*.resources.srcDirs*.each { it.mkdirs() }
-}
-
 dependencies {
     pmd "com.alibaba.p3c:p3c-pmd:${p3c}"
 
@@ -83,6 +79,20 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     compile('org.springframework.boot:spring-boot-configuration-processor')
 
+    //springcloud
+    compile('org.springframework.cloud:spring-cloud-starter-consul-all')
+    compile('org.springframework.cloud:spring-cloud-starter-netflix-hystrix')
+    compile('org.springframework.boot:spring-boot-starter-actuator')
+
     // springboot test
     testImplementation('org.springframework.boot:spring-boot-starter-test')
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+    imports {
+        mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
+    }
 }

@@ -1,0 +1,20 @@
+buildscript {
+    ext {
+        springBootVersion = '2.1.0.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:\${springBootVersion}")
+    }
+}
+
+apply from: "http://192.168.32.55:10086/zhouzx/lvji-codes/raw/master/boot.gradle"
+
+group ${groupId}
+version ${version}
+
+dependencies {
+   //own dependencies
+}

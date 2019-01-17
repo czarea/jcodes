@@ -11,6 +11,12 @@ repositories {
     mavenCentral()
 }
 
+ext {
+    beetl = "2.9.7"
+}
+
 dependencies {
+    compile "com.ibeetl:beetl:${beetl}"
+
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
