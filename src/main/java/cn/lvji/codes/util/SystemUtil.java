@@ -13,9 +13,6 @@ public class SystemUtil {
 
     /**
      * 获取环境变量
-     *
-     * @param key key
-     * @return
      */
     public static String getEnv(String key) {
         Map map = System.getenv();

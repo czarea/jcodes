@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="@{package}.dao.@{table.className}Mapper">
+    <sql id="Base_Column_List">
+        #
+        for(column in table.columns){
+            var str = "";
+            if(columnLP.index!=1) {
+              str = str + ",";
+            }
+            str = str + utils.toLowerCase(column.columnName);
+            if(utils.toLowerCase(column.columnName)!=utils.toLowerCaseFirst(column.columnJavaName) ) {
+              str = str + " as " + utils.toLowerCaseFirst(column.columnJavaName);
+            }
+            print(str);
+        }
+        println("");
+        #
+    </sql>
+
+    <resultMap id="BaseResultMap" type="@{table.className}">
+      # for(column in table.columns){ #
+        # if(column.pk) { #
+      <id column="@{column.columnName}" property="@{utils.toLowerCaseFirst(column.columnJavaName)}" />
+        # } else { #
+      <result column="@{column.columnName}" property="@{utils.toLowerCaseFirst(column.columnJavaName)}" />
+        # } #
+        # } #
+    </resultMap>
+
+	  <select id="get@{table.className}Page" resultType="@{table.className}">
+      select <include refid="Base_Column_List" /> from @{table.tableName}
+      <where>
+        <if test="@{utils.toLowerCaseFirst(table.className)} != null">
+      # for(column in table.searchColumns){ #
+         # if(! utils.equals('varchar',utils.toLowerCase(column.sqlTypeName)) ) { #
+          <if test="@{utils.toLowerCaseFirst(table.className)}.@{utils.toLowerCaseFirst(column.columnJavaName)} != null ">
+          and @{column.columnName} >= \#{@{utils.toLowerCaseFirst(table.className)}.@{utils.toLowerCaseFirst(column.columnJavaName)}}
+          </if>
+            # } else { #
+          <if test="@{utils.toLowerCaseFirst(table.className)}.@{utils.toLowerCaseFirst(column.columnJavaName)} != null and @{utils.toLowerCaseFirst(table.className)}.@{utils.toLowerCaseFirst(column.columnJavaName)} != ''">
+          and @{column.columnName} like concat('%',\#{@{utils.toLowerCaseFirst(table.className)}.@{utils.toLowerCaseFirst(column.columnJavaName)}},'%')
+          </if>
+            # } #
+        # } #
+        </if>
+      </where>
+    </select>
+
+</mapper>

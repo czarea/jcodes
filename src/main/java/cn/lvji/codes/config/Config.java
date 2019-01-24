@@ -1,12 +1,11 @@
 package cn.lvji.codes.config;
 
-import cn.lvji.codes.model.CodesConfig;
-import cn.lvji.codes.util.StringUtils;
-import cn.lvji.codes.util.SystemUtil;
+import cn.lvji.codes.model.Codes;
+import org.yaml.snakeyaml.Yaml;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Properties;
 
 /**
  * 配置文件
@@ -14,39 +13,43 @@ import java.util.Properties;
  * @author zhouzx
  */
 public class Config {
-    public static CodesConfig init() throws IOException {
-        Properties properties = new Properties();
-        InputStream in = Config.class.getClassLoader().getResourceAsStream("codes.properties");
-        properties.load(in);
-        CodesConfig codesConfig = new CodesConfig();
-        String dir = properties.getProperty("project.dir");
-        if (StringUtils.isEmpty(dir)) {
-            dir = System.getProperty("user.dir") + "codes";
-        }
-        codesConfig.setDir(dir);
-        String name = properties.getProperty("project.name");
-        if (StringUtils.isEmpty(name)) {
-            name = "generate-codes-test";
-        }
-        codesConfig.setName(name);
-        String home = properties.getProperty("gradle.home");
-        if (StringUtils.isEmpty(home)) {
-            home = SystemUtil.getEnv("gradle_home");
-        }
-        codesConfig.setHome(home);
-        String groupId = properties.getProperty("groupId");
-        if (StringUtils.isEmpty(groupId)) {
-            groupId = "xx.xx";
-        }
-        codesConfig.setGroupId(StringUtils.wrapperSingleQuote(groupId));
+    private static Codes codes;
 
-        String version = properties.getProperty("version");
-        if (StringUtils.isEmpty(version)) {
-            version = "1.0";
-        }
-        codesConfig.setVersion(StringUtils.wrapperSingleQuote(version));
+    private static class SingletonInstance {
+        private static final Config INSTANCE = new Config();
+    }
 
-        return codesConfig;
+    public static Config getInstance() {
+        return Config.SingletonInstance.INSTANCE;
+    }
+
+    /**
+     * 加载配置
+     *
+     * @return Codes
+     */
+    public static Codes yamlInit() {
+        if (codes != null) {
+            return codes;
+        }
+        Yaml yaml = new Yaml();
+        try (InputStream in = Config.class.getClassLoader().getResourceAsStream("codes.yml")) {
+            codes = yaml.loadAs(in, Codes.class);
+            return codes;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static String getTablePrefixes() {
+        return codes.getTemplate().getPrefixes();
+    }
+
+    public static Codes getCodes() {
+        return codes;
     }
 
 }

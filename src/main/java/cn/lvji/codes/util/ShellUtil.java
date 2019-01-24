@@ -10,7 +10,7 @@ import java.nio.file.Paths;
  *
  * @author zhouzx
  */
-public class ExecutorCmdUtil {
+public class ShellUtil {
 
 
     /**
@@ -26,7 +26,6 @@ public class ExecutorCmdUtil {
         if (!Files.exists(path)) {
             Files.createDirectories(path);
         }
-
         Process process = Runtime.getRuntime().exec(cmd, envp, new File(dir));
         InputStream is = process.getInputStream();
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
