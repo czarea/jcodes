@@ -4,7 +4,7 @@
 代码生成工厂
 
 #### 软件架构
-架构功能说明
+
 ![images](./docs/jcodes-mind.png)
 
 
@@ -17,7 +17,8 @@
 #### 源码使用说明
 
 1. 配置codes.yml,配置样例
-```text
+
+```
 gradleHome: E:/gradle/gradle-4.6
 author: zhouzx
 project:
@@ -49,9 +50,21 @@ beetl:
     placeholderStart: "@{"
     placeholderEnd: "}"
 ```
-2. 配置模版文件，项目中有模版文件样例，在templates目录下
+
+2. 配置模版文件，项目中有模版文件样例，在templates/java/guide目录下
 3. 运行Bootstrap类
 
 #### 脚本使用说明
 
+```
+参数：p pj    （创建项目）
+      p code  （生产代码）
+	  d       （删除代码）
+```
+
+1. windows系统下运行bin/jcodes.bat p pj
+2. linux系统下运行bin/jcodes.sh p pj
+
 #### idea插件使用说明
+
+待开发

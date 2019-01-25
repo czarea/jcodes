@@ -2,6 +2,7 @@ gradleHome: E:/gradle/gradle-4.6
 author: zhouzx
 project:
   baseDir: D:/codes/test2
+  template: D:\lvji_git\jcodes\templates
   name: lvji-codes-test
   groupId: cn.lvji
   version: 1.0

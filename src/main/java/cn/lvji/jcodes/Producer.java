@@ -20,8 +20,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
 
 /**
  * 生成器
@@ -137,7 +135,7 @@ public class Producer {
         map.put("groupId", StringUtils.wrapperSingleQuote(codes.getProject().getGroupId()));
         map.put("version", StringUtils.wrapperSingleQuote(codes.getProject().getVersion()));
         String buildGradle = codes.getProject().getBaseDir() + "/" + codes.getProject().getName() + "/build.gradle";
-        BeetlUtil.produce(System.getProperty("user.dir"), "templates/boot.template", buildGradle, map);
+        BeetlUtil.produce(codes.getProject().getTemplate(), "boot.template", buildGradle, map);
 
         String projectPath = codes.getProject().getBaseDir() + File.separator + codes.getProject().getName();
         final CountDownLatch latch = new CountDownLatch(1);

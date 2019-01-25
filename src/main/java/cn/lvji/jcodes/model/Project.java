@@ -7,6 +7,7 @@ package cn.lvji.jcodes.model;
  */
 public class Project {
     private String baseDir;
+    private String template;
     private String name;
     private String module;
     private String groupId;
@@ -18,6 +19,14 @@ public class Project {
 
     public void setBaseDir(String baseDir) {
         this.baseDir = baseDir;
+    }
+
+    public String getTemplate() {
+        return template;
+    }
+
+    public void setTemplate(String template) {
+        this.template = template;
     }
 
     public String getName() {

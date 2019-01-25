@@ -1,9 +1,10 @@
 plugins {
     id 'java'
+    id "com.github.johnrengelman.shadow" version "4.0.4"
 }
 
 group 'cn.lvji'
-version '1.0-SNAPSHOT'
+version '1.0'
 
 sourceCompatibility = 1.8
 
@@ -15,6 +16,25 @@ ext {
     beetl = "2.9.7"
     snakeyaml = "1.23"
     mysql = "6.0.6"
+    mainClassName = "cn.lvji.jcodes.Bootstrap"
+}
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+[compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
+
+mainClassName = "cn.lvji.jcodes.Bootstrap"
+
+jar {
+    manifest {
+        attributes("Main-Class": "${mainClassName}",
+                "Implementation-Title": "Gradle")
+    }
+}
+
+shadowJar {
+    baseName = 'jcodes'
+    classifier = null
+    version = null
 }
 
 dependencies {

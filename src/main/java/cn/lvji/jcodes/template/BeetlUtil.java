@@ -6,6 +6,7 @@ import cn.lvji.jcodes.util.StringUtils;
 import org.beetl.core.Configuration;
 import org.beetl.core.GroupTemplate;
 import org.beetl.core.Template;
+import org.beetl.core.resource.ClasspathResourceLoader;
 import org.beetl.core.resource.FileResourceLoader;
 import org.beetl.core.resource.StringTemplateResourceLoader;
 
@@ -66,6 +67,26 @@ public class BeetlUtil {
         FileResourceLoader resourceLoader = new FileResourceLoader(rootPath);
         GroupTemplate groupTemplate = createTemplate(rootPath);
         Template template = groupTemplate.getTemplate(templatePath, resourceLoader);
+        bindingCommon(template);
+        template.binding(map);
+        FileOutputStream outputStream = new FileOutputStream(outPath);
+        template.renderTo(outputStream);
+    }
+
+
+    /**
+     * 根据模版生成文件
+     *
+     * @param templatePath 模版文件名
+     * @param outPath      输出文件名
+     * @param map          模版变量
+     * @throws IOException
+     */
+    public static void classPathProduce(String templatePath, String outPath, Map<String, Object> map) throws IOException {
+        ClasspathResourceLoader classpathResourceLoader = new ClasspathResourceLoader();
+        Configuration cfg = Configuration.defaultConfiguration();
+        GroupTemplate groupTemplate = new GroupTemplate(classpathResourceLoader, cfg);
+        Template template = groupTemplate.getTemplate(templatePath);
         bindingCommon(template);
         template.binding(map);
         FileOutputStream outputStream = new FileOutputStream(outPath);
