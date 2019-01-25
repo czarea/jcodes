@@ -7,7 +7,7 @@ project:
     version: 1.0
     module: pay
 template:
-    dir: D:\lvji_git\lvji-codes\templates\java\guide
+    dir: D:\lvji_git\jcodes\templates\java\guide
     outPath: D:/codes/test2/bb
     basePackage: cn.lvji.order
     tables:
@@ -17,18 +17,14 @@ template:
     keys:
         module: zzx
         day: abc
-tables:
-    list:
-    - eo_api
-    - eo_api_cache
-    prefixes: eo_
 db:
     userName: root
     password: 123456
+    database: eolinker
     url: jdbc:mysql://192.168.32.88:3306/eolinker?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
     driverClass: com.mysql.cj.jdbc.Driver
 beetl:
-    statementStart: #
-    statementEnd: #
-    placeholderStart: \@\{
-    placeholderEnd: \}
+    statementStart: "#"
+    statementEnd: "#"
+    placeholderStart: "@{"
+    placeholderEnd: "}"
