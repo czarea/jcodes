@@ -23,6 +23,7 @@ gradleHome: E:/gradle/gradle-4.6
 author: zhouzx
 project:
     baseDir: D:/codes/test2
+    template: D:\lvji_git\jcodes\templates
     name: lvji-codes-test
     groupId: cn.lvji
     version: 1.0
@@ -39,10 +40,10 @@ template:
         module: zzx
         day: abc
 db:
-    userName: root
-    password: 123456
-    database: eolinker
-    url: jdbc:mysql://192.168.32.88:3306/eolinker?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
+    userName: xxx
+    password: xxx
+    database: xxx
+    url: jdbc:mysql://192.168.32.88:3306/xxx?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
     driverClass: com.mysql.cj.jdbc.Driver
 beetl:
     statementStart: "#"

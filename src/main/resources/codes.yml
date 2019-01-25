@@ -19,8 +19,8 @@ template:
         module: zzx
         day: abc
 db:
-    userName: root
-    password: 123456
+    userName: lvji
+    password: L@#$j
     database: eolinker
     url: jdbc:mysql://192.168.32.88:3306/eolinker?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
     driverClass: com.mysql.cj.jdbc.Driver
