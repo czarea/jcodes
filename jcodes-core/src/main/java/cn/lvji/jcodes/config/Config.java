@@ -20,7 +20,7 @@ public class Config {
     }
 
     public static Config getInstance() {
-        return Config.SingletonInstance.INSTANCE;
+        return SingletonInstance.INSTANCE;
     }
 
     /**

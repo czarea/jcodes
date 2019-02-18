@@ -1,0 +1,40 @@
+plugins {
+    id "com.github.johnrengelman.shadow" version "4.0.4"
+}
+
+group 'cn.lvji'
+version '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    beetl = "2.9.7"
+    snakeyaml = "1.23"
+    mysql = "6.0.6"
+    mainClassName = "cn.lvji.jcodes.Bootstrap"
+}
+
+mainClassName = "cn.lvji.jcodes.Bootstrap"
+
+jar {
+    manifest {
+        attributes("Main-Class": "${mainClassName}",
+                "Implementation-Title": "Gradle")
+    }
+}
+
+shadowJar {
+    baseName = 'jcodes'
+    classifier = null
+    version = null
+}
+
+dependencies {
+    compile "com.ibeetl:beetl:${beetl}"
+    compile "org.yaml:snakeyaml:${snakeyaml}"
+    compile "mysql:mysql-connector-java:${mysql}"
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}

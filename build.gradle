@@ -1,46 +1,18 @@
-plugins {
-    id 'java'
-    id "com.github.johnrengelman.shadow" version "4.0.4"
+allprojects {
+    group 'cn.lvji'
+    version = '1.0'
 }
 
-group 'cn.lvji'
-version '1.0'
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    version = '1.0.0'
 
-sourceCompatibility = 1.8
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+    [compileJava,compileTestJava,javadoc]*.options*.encoding = 'UTF-8'
 
-repositories {
-    mavenCentral()
-}
-
-ext {
-    beetl = "2.9.7"
-    snakeyaml = "1.23"
-    mysql = "6.0.6"
-    mainClassName = "cn.lvji.jcodes.Bootstrap"
-}
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-[compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
-
-mainClassName = "cn.lvji.jcodes.Bootstrap"
-
-jar {
-    manifest {
-        attributes("Main-Class": "${mainClassName}",
-                "Implementation-Title": "Gradle")
+    repositories {
+        mavenCentral()
     }
-}
-
-shadowJar {
-    baseName = 'jcodes'
-    classifier = null
-    version = null
-}
-
-dependencies {
-    compile "com.ibeetl:beetl:${beetl}"
-    compile "org.yaml:snakeyaml:${snakeyaml}"
-    compile "mysql:mysql-connector-java:${mysql}"
-
-    testCompile group: 'junit', name: 'junit', version: '4.12'
 }

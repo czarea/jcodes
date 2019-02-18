@@ -86,7 +86,7 @@ public class Producer {
      */
     public void deleteOutput() throws IOException {
         codes = Config.yamlInit();
-        Path path = Paths.get(codes.getTemplate().getOutPath().toString());
+        Path path = Paths.get(codes.getTemplate().getOutPath());
         if (Files.exists(path)) {
             Files.delete(path);
         }
