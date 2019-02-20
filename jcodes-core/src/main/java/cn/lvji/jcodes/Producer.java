@@ -35,6 +35,21 @@ public class Producer {
      * @throws IOException
      * @throws InterruptedException
      */
+    public void produceProject(String config) throws IOException, InterruptedException {
+        codes = Config.yamlInit(config);
+        String projectPath = codes.getProject().getBaseDir() + File.separator + codes.getProject().getName();
+        String createProjectResponse = GradleUtil.executeGradleCmd(projectPath, "init");
+        System.out.println(createProjectResponse);
+        configGradle();
+        copyConfig();
+    }
+
+    /**
+     * 生产模版项目
+     *
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public void produceProject() throws IOException, InterruptedException {
         init();
         configGradle();
@@ -48,6 +63,20 @@ public class Producer {
      */
     public void produceCodes() throws IOException {
         codes = Config.yamlInit();
+        baseProduceCodes(codes);
+    }
+
+    /**
+     * 生产模版代码
+     *
+     * @throws IOException
+     */
+    public void produceCodes(String config) throws IOException {
+        codes = Config.yamlInit(config);
+        baseProduceCodes(codes);
+    }
+
+    private void baseProduceCodes(Codes codes) throws IOException {
         codes.getTemplate().getKeys().put("package", codes.getTemplate().getBasePackage());
         codes.getTemplate().getKeys().put("author", codes.getAuthor());
         LocalDateTime time = LocalDateTime.now();
@@ -127,7 +156,6 @@ public class Producer {
         String projectPath = codes.getProject().getBaseDir() + File.separator + codes.getProject().getName();
         String createProjectResponse = GradleUtil.executeGradleCmd(projectPath, "init");
         System.out.println(createProjectResponse);
-
     }
 
     protected void configGradle() throws IOException {

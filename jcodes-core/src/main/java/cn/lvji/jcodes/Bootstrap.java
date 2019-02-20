@@ -33,9 +33,10 @@ public class Bootstrap {
 
 
     private static void help() {
-        System.out.println("参数：p pj    （创建项目）\n" +
+        System.out.println(
+                "参数：p pj    （创建项目）\n" +
                 "      p code  （生产代码）\n" +
-                "\t  d       （删除代码）");
+                "      d       （删除代码）");
     }
 
 }

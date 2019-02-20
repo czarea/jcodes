@@ -58,9 +58,13 @@ beetl:
 #### 脚本使用说明
 
 ```
-参数：p pj    （创建项目）
-      p code  （生产代码）
-	  d       （删除代码）
+参数：
+    p pj    （创建项目）
+    p code  （生产代码）
+    d       （删除代码）
+示例：	  
+./jcodes.bat p pj
+./jcodes.sh p code
 ```
 
 1. windows系统下运行bin/jcodes.bat p pj

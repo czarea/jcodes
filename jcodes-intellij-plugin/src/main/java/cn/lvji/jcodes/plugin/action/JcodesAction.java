@@ -1,16 +1,25 @@
 package cn.lvji.jcodes.plugin.action;
 
+import cn.lvji.jcodes.plugin.ui.ProducerDialog;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.fileChooser.FileChooser;
+import com.intellij.openapi.fileChooser.FileChooserDescriptor;
+import com.intellij.openapi.vfs.VirtualFile;
 
-
+/**
+ * idea action
+ *
+ * @author zhouzx
+ */
 public class JcodesAction extends AnAction {
 
     @Override
     public void actionPerformed(AnActionEvent event) {
-        Project project = event.getProject();
-        Messages.showMessageDialog(project, "Hello world!", "Greeting", Messages.getInformationIcon());
+        ProducerDialog dialog = new ProducerDialog(event.getProject());
+        dialog.pack();
+        dialog.setVisible(true);
+        dialog.setLocationRelativeTo(null);
+        dialog.setSize(800, 400);
     }
 }
