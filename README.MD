@@ -89,4 +89,7 @@ beetl:
 
 #### idea插件使用说明
 
-待开发
+1. IDE中安装项目打成的插件包
+2. ALT+S快捷键或对应选项卡界面选中运行jcodes插件
+![images](./docs/jcodes.png)
+3. 根据本地配置的codes.yml,生成对应项目or代码
