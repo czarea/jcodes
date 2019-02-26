@@ -19,19 +19,35 @@
 1. 配置codes.yml,配置样例
 
 ```
+#gradle路径
 gradleHome: E:/gradle/gradle-4.6
+#作者
 author: zhouzx
+#生成项目配置
 project:
-    baseDir: D:/codes/test2
+    #生成的项目目标目录
+    baseDir: D:/codes/test
+    #项目配置文件的来源目录
+    config: D:\lvji_git\jcodes\config
+    #模板文件的来源目录
     template: D:\lvji_git\jcodes\templates
+    #项目名
     name: lvji-codes-test
+    #坐标
     groupId: cn.lvji
+    #版本号
     version: 1.0
+    #模块
     module: pay
+#生成业务代码配置
 template:
+    #模板文件的来源目录,请注意分隔符必须是反斜杠
     dir: D:\lvji_git\jcodes\templates\java\guide
+    #生成的代码目标目录
     outPath: D:/codes/test2/bb
+    #包名
     basePackage: cn.lvji.order
+    #需要生成的业务表
     tables:
         - eo_api
         - eo_api_cache
@@ -39,6 +55,7 @@ template:
     keys:
         module: zzx
         day: abc
+#数据库配置
 db:
     userName: xxx
     password: xxx

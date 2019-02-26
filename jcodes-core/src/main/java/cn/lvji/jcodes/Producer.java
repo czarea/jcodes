@@ -188,7 +188,7 @@ public class Producer {
     }
 
     protected void copyConfig() throws IOException {
-        String configTemplate = System.getProperty("user.dir") + "/config";
+        String configTemplate = codes.getProject().getConfig();
         String projectConfig = codes.getProject().getBaseDir() + "/" + codes.getProject().getName() + "/config";
         FileUtil.copyDir(configTemplate, projectConfig);
     }

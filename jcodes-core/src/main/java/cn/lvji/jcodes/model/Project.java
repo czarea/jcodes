@@ -12,6 +12,15 @@ public class Project {
     private String module;
     private String groupId;
     private String version;
+    private String config;
+
+    public String getConfig() {
+        return config;
+    }
+
+    public void setConfig(String config) {
+        this.config = config;
+    }
 
     public String getBaseDir() {
         return baseDir;

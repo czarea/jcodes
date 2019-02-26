@@ -6,6 +6,7 @@ import cn.lvji.jcodes.util.StringUtils;
 import org.beetl.core.Configuration;
 import org.beetl.core.GroupTemplate;
 import org.beetl.core.Template;
+import org.beetl.core.cache.ProgramCacheFactory;
 import org.beetl.core.resource.ClasspathResourceLoader;
 import org.beetl.core.resource.FileResourceLoader;
 import org.beetl.core.resource.StringTemplateResourceLoader;
@@ -96,6 +97,8 @@ public class BeetlUtil {
     public static String getFileName(String templatePath, String className) throws Exception {
         StringTemplateResourceLoader stringLoader = new StringTemplateResourceLoader();
         Configuration cfg = Configuration.defaultConfiguration();
+        ClassLoader loader = ProgramCacheFactory.class.getClassLoader();
+        Thread.currentThread().setContextClassLoader(loader);
         GroupTemplate stringTemplate = new GroupTemplate(stringLoader, cfg);
         Template template = stringTemplate.getTemplate(templatePath);
         template.binding("className", className);
@@ -117,6 +120,8 @@ public class BeetlUtil {
         }
         FileResourceLoader resourceLoader = new FileResourceLoader(rootPath);
         Configuration cfg = Configuration.defaultConfiguration();
+        ClassLoader loader = ProgramCacheFactory.class.getClassLoader();
+        Thread.currentThread().setContextClassLoader(loader);
         groupTemplate = new GroupTemplate(resourceLoader, cfg);
         groupTemplate.registerFunctionPackage("utils", StringUtils.class);
         cfg.setStatementStart(Config.getCodes().getBeetl().getStatementStart());
