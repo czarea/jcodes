@@ -53,6 +53,7 @@ public class ProducerDialog extends JDialog {
         contentPane.registerKeyboardAction(e -> onCancel(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
         chooseFileButton.addActionListener(e -> addChooseListener(project));
+        this.setLocationRelativeTo(null);
     }
 
     private void onOK() {
@@ -65,6 +66,7 @@ public class ProducerDialog extends JDialog {
         if (projectRadio.isSelected()) {
             try {
                 producer.produceProject(config);
+                Messages.showInfoMessage("成功创建工程!","Success!");
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (InterruptedException e) {
@@ -73,6 +75,7 @@ public class ProducerDialog extends JDialog {
         }else {
             try {
                 producer.produceCodes(config);
+                Messages.showInfoMessage("成功生成代码!","Success!");
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -7,7 +7,9 @@ import java.io.IOException;
 public class ProducerTest {
 
     @Test
-    public void productProject() {
+    public void productProject() throws IOException, InterruptedException {
+        Producer producer = new Producer();
+        producer.produceProject();
     }
 
     @Test

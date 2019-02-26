@@ -75,25 +75,6 @@ public class BeetlUtil {
     }
 
 
-    /**
-     * 根据模版生成文件
-     *
-     * @param templatePath 模版文件名
-     * @param outPath      输出文件名
-     * @param map          模版变量
-     * @throws IOException
-     */
-    public static void classPathProduce(String templatePath, String outPath, Map<String, Object> map) throws IOException {
-        ClasspathResourceLoader classpathResourceLoader = new ClasspathResourceLoader();
-        Configuration cfg = Configuration.defaultConfiguration();
-        GroupTemplate groupTemplate = new GroupTemplate(classpathResourceLoader, cfg);
-        Template template = groupTemplate.getTemplate(templatePath);
-        bindingCommon(template);
-        template.binding(map);
-        FileOutputStream outputStream = new FileOutputStream(outPath);
-        template.renderTo(outputStream);
-    }
-
     public static String getFileName(String templatePath, String className) throws Exception {
         StringTemplateResourceLoader stringLoader = new StringTemplateResourceLoader();
         Configuration cfg = Configuration.defaultConfiguration();
@@ -121,6 +102,8 @@ public class BeetlUtil {
         FileResourceLoader resourceLoader = new FileResourceLoader(rootPath);
         Configuration cfg = Configuration.defaultConfiguration();
         ClassLoader loader = ProgramCacheFactory.class.getClassLoader();
+        ClassLoader ploader = loader.getParent();
+        ClassLoader tloader = Thread.currentThread().getContextClassLoader();
         Thread.currentThread().setContextClassLoader(loader);
         groupTemplate = new GroupTemplate(resourceLoader, cfg);
         groupTemplate.registerFunctionPackage("utils", StringUtils.class);
