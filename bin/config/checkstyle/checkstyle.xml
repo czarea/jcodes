@@ -178,7 +178,5 @@
     <module name="SuperClone" />
     <!-- finalize 必须调用了super.finalize() -->
     <module name="SuperFinalize" />
-
-
   </module>
 </module>

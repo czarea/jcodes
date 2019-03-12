@@ -10,7 +10,7 @@ buildscript {
     }
 }
 
-apply from: "http://192.168.32.55:10086/zhouzx/lvji-codes/raw/master/components/boot.gradle"
+apply from: "http://192.168.32.55:10086/zhouzx/jcodes/raw/master/components/boot.gradle"
 
 group @{groupId}
 version @{version}

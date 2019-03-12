@@ -1,27 +1,35 @@
 <idea-plugin>
     <id>cn.lvji</id>
     <name>jcodes</name>
+    <version>1.0</version>
     <description>
         <![CDATA[
-            <html>producer project or codes from template<br>
+            <html>
+                producer project or codes from template<br>
                 <a href="https://github.com/zhouzx23/jcodes.git">source code</a>
             </html>
         ]]>
     </description>
+    <change-notes>
+        <![CDATA[
+            <ul>1.0</ul>
+        ]]>
+    </change-notes>
     <version>1.0</version>
-    <vendor email="363851356@qq.com" >zhouzx</vendor>
+    <idea-version since-build="141.0"/>
+    <vendor email="363851356@qq.com">zhouzx</vendor>
     <depends>com.intellij.modules.lang</depends>
-
-    <extensions defaultExtensionNs="com.intellij">
-    </extensions>
 
     <actions>
         <group id="jcodes" text="jcodes" description="Greeting menu">
             <add-to-group group-id="CodeMenu" anchor="last"/>
-            <action id="produce" class="cn.lvji.jcodes.plugin.action.JcodesAction" text="jcodes" description="创建项目|生成代码">
+            <action id="produce" class="cn.lvji.jcodes.plugin.action.JcodesAction" text="jcodes"
+                    description="创建项目|生成代码">
                 <keyboard-shortcut keymap="$default" first-keystroke="alt s"/>
             </action>
         </group>
     </actions>
+
+
 
 </idea-plugin>
