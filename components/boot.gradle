@@ -76,6 +76,11 @@ task "createDirs" << {
     sourceSets*.resources.srcDirs*.each { it.mkdirs() }
 }
 
+task exportJars(type: Copy) {
+    from configurations.compile
+    into "$buildDir/libs"
+}
+
 dependencies {
     pmd "com.alibaba.p3c:p3c-pmd:${p3c}"
 
