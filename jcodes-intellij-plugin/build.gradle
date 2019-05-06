@@ -5,7 +5,7 @@ plugins {
 apply plugin: 'org.jetbrains.intellij'
 
 group 'cn.lvji'
-version '1.0'
+version '1.1'
 
 dependencies {
     compile project(":jcodes-core")
@@ -24,7 +24,5 @@ task abc << {
 }
 
 publishPlugin {
-//    username intellijPublishUsername
-//    password intellijPublishPassword
     token intellijPublishToken
 }
