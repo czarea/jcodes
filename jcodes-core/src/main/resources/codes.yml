@@ -4,18 +4,18 @@ project:
     baseDir: D:/codes/test2
     config: D:\lvji_git\jcodes\config
     template: D:\lvji_git\jcodes\templates
-    name: lvji-codes-test
+    name: order-garden
     groupId: cn.lvji
     version: 1.0
     module: pay
 template:
     dir: D:\lvji_git\jcodes\templates\java\guide
     outPath: D:/codes/test2/bb
-    basePackage: cn.lvji.order
+    basePackage: cn.lvji.order.garden
     tables:
-        - eo_api
-        - eo_api_cache
-    prefixes: eo_
+        - t_scenic_type_rate
+        - t_scenic_month_sales
+    prefixes: t_
     keys:
         module: zzx
         day: abc
@@ -23,7 +23,7 @@ db:
     userName: lvji
     password: L@#$j
     database: eolinker
-    url: jdbc:mysql://192.168.32.88:3306/eolinker?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
+    url: jdbc:mysql://192.168.32.88:3306/batch?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
     driverClass: com.mysql.cj.jdbc.Driver
 beetl:
     statementStart: "#"
