@@ -12,8 +12,8 @@
     </description>
     <change-notes>
         <![CDATA[
-            <ul>1.0</ul>
-            <ul>1.1</ul>
+            <ul>1. update template file</ul>
+            <ul>2. primaryKey to entity</ul>
         ]]>
     </change-notes>
     <idea-version since-build="141.0"/>

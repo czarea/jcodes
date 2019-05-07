@@ -15,7 +15,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +31,8 @@ import java.util.concurrent.CountDownLatch;
  */
 public class Producer {
 	private Codes codes;
+	private static final CodesDataSource DATA_SOURCE = CodesDataSource
+			.getInstance();
 
 	/**
 	 * 生产模版项目
@@ -35,10 +40,14 @@ public class Producer {
 	 * @throws IOException
 	 * @throws InterruptedException
 	 */
-	public void produceProject(String config) throws IOException, InterruptedException {
+	public void produceProject(String config)
+			throws IOException, InterruptedException {
 		codes = Config.yamlInit(config);
-		String projectPath = codes.getProject().getBaseDir() + File.separator + codes.getProject().getName();
-		String createProjectResponse = GradleUtil.executeGradleCmd(projectPath, "init");
+		String projectPath =
+				codes.getProject().getBaseDir() + File.separator + codes
+						.getProject().getName();
+		String createProjectResponse = GradleUtil
+				.executeGradleCmd(projectPath, "init");
 		System.out.println(createProjectResponse);
 		configGradle();
 		copyConfig();
@@ -62,6 +71,7 @@ public class Producer {
 	 * @throws IOException
 	 */
 	public void produceCodes() throws IOException {
+		codes = null;
 		codes = Config.yamlInit();
 		baseProduceCodes(codes);
 	}
@@ -77,7 +87,8 @@ public class Producer {
 	}
 
 	private void baseProduceCodes(Codes codes) throws IOException {
-		codes.getTemplate().getKeys().put("package", codes.getTemplate().getBasePackage());
+		codes.getTemplate().getKeys()
+				.put("package", codes.getTemplate().getBasePackage());
 		codes.getTemplate().getKeys().put("author", codes.getAuthor());
 		LocalDateTime time = LocalDateTime.now();
 		codes.getTemplate().getKeys().put("timestamp", time.toString());
@@ -86,26 +97,50 @@ public class Producer {
 
 		CodesDataSource.getInstance().init(codes);
 		List<String> tables = codes.getTemplate().getTables();
-		StringBuffer codeOutDir = new StringBuffer(codes.getTemplate().getOutPath());
-		codeOutDir.append(File.separator).append(codes.getTemplate().getBasePackage().replaceAll("\\.", "/"));
+		StringBuffer codeOutDir = new StringBuffer(
+				codes.getTemplate().getOutPath());
+		codeOutDir.append(File.separator)
+				.append(codes.getTemplate().getBasePackage()
+						.replaceAll("\\.", "/"));
 		Path path = Paths.get(codeOutDir.toString());
 
 		if (!Files.exists(path)) {
 			Files.createDirectories(path);
 		}
+		if (tables != null) {
+			tables.removeAll(Collections.singleton(null));
+		}
 
 		if (tables == null || tables.isEmpty()) {
-			tables = TableExtractor.getAllTables(codes.getDb().getDatabase());
+			try (Connection conn = DATA_SOURCE.getConnection()) {
+				String dbName = conn.getCatalog();
+				tables = TableExtractor.getAllTables(dbName);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		tables.forEach(item -> {
 			Table table = TableExtractor.getTable(item);
 			try {
-				produceFile(codes.getTemplate().getDir(), codes.getTemplate().getOutPath(), table);
+				produceFile(codes.getTemplate().getDir(),
+						codes.getTemplate().getOutPath(), table);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		});
+
+		String os = System.getProperty("os.name");
+		if (os.toLowerCase().startsWith("win")) {
+			StringBuffer outputPath = new StringBuffer(
+					codes.getTemplate().getOutPath());
+			String basePackage = codes.getTemplate().getBasePackage();
+			if (!StringUtils.isEmpty(basePackage)) {
+				outputPath.append(File.separator)
+						.append(basePackage.replaceAll("\\.", "/"));
+			}
+			java.awt.Desktop.getDesktop().open(new File(outputPath.toString()));
+		}
 	}
 
 	/**
@@ -121,19 +156,25 @@ public class Producer {
 		}
 	}
 
-	protected void produceFile(String templateDir, String outPath, Table table) throws Exception {
+	protected void produceFile(String templateDir, String outPath, Table table)
+			throws Exception {
 		List<File> files = FileUtil.getFileList(templateDir);
 		for (int i = 0; i < files.size(); i++) {
 			File item = files.get(i);
-			System.out.println("开始生成数据库表：" + table.getName() + " 的 " + item.getAbsolutePath() + "模版代码");
+			System.out.println("开始生成数据库表：" + table.getName() + " 的 " + item
+					.getAbsolutePath() + "模版代码");
 			long start = System.currentTimeMillis();
-			String outPutFileName = BeetlUtil.getFileName(item.getName(), table.getClassName());
-			String relativePath = FileUtil.getRelativePath(templateDir, item.getAbsolutePath());
-			String bizPath = relativePath.substring(0, relativePath.lastIndexOf("\\"));
+			String outPutFileName = BeetlUtil
+					.getFileName(item.getName(), table.getClassName());
+			String relativePath = FileUtil
+					.getRelativePath(templateDir, item.getAbsolutePath());
+			String bizPath = relativePath
+					.substring(0, relativePath.lastIndexOf("\\"));
 			StringBuffer outputPath = new StringBuffer(outPath);
 			String basePackage = codes.getTemplate().getBasePackage();
 			if (!StringUtils.isEmpty(basePackage)) {
-				outputPath.append(File.separator).append(basePackage.replaceAll("\\.", "/"));
+				outputPath.append(File.separator)
+						.append(basePackage.replaceAll("\\.", "/"));
 			}
 			outputPath.append(bizPath).append(File.separator);
 			Path outputDir = Paths.get(outputPath.toString());
@@ -141,34 +182,42 @@ public class Producer {
 				Files.createDirectories(outputDir);
 			}
 			outputPath.append(outPutFileName);
-			codes.getTemplate().getKeys().put("className", table.getClassName());
+			codes.getTemplate().getKeys()
+					.put("className", table.getClassName());
 			try {
-				BeetlUtil.produceCodes(table, templateDir, relativePath.substring(1), outputPath.toString(),
+				BeetlUtil.produceCodes(table, templateDir,
+						relativePath.substring(1), outputPath.toString(),
 						codes.getTemplate().getKeys());
 			} catch (IOException e) {
 			}
 			long end = System.currentTimeMillis();
 			System.out.println(
-					"生成数据库表：" + table.getName() + " 的 " + item.getAbsolutePath() + "模版代码成功，耗时：" + (end - start)
-							+ " ms");
+					"生成数据库表：" + table.getName() + " 的 " + item.getAbsolutePath()
+							+ "模版代码成功，耗时：" + (end - start) + " ms");
 		}
 	}
 
 	protected void init() throws IOException, InterruptedException {
 		codes = Config.yamlInit();
-		String projectPath = codes.getProject().getBaseDir() + File.separator + codes.getProject().getName();
-		String createProjectResponse = GradleUtil.executeGradleCmd(projectPath, "init");
+		String projectPath =
+				codes.getProject().getBaseDir() + File.separator + codes
+						.getProject().getName();
+		String createProjectResponse = GradleUtil
+				.executeGradleCmd(projectPath, "init");
 		System.out.println(createProjectResponse);
 	}
 
 	protected void configGradle() throws IOException {
 		createFilesFromTemplate();
-		String projectPath = codes.getProject().getBaseDir() + File.separator + codes.getProject().getName();
+		String projectPath =
+				codes.getProject().getBaseDir() + File.separator + codes
+						.getProject().getName();
 		final CountDownLatch latch = new CountDownLatch(1);
 		new Thread(() -> {
 			String createDirsResponse = null;
 			try {
-				createDirsResponse = GradleUtil.executeGradleCmd(projectPath, "createDirs");
+				createDirsResponse = GradleUtil
+						.executeGradleCmd(projectPath, "createDirs");
 				System.out.println(createDirsResponse);
 				latch.countDown();
 			} catch (IOException e) {
@@ -191,18 +240,28 @@ public class Producer {
 	 */
 	private void createFilesFromTemplate() throws IOException {
 		Map<String, Object> map = new HashMap<>(3);
-		map.put("groupId", StringUtils.wrapperSingleQuote(codes.getProject().getGroupId()));
-		map.put("version", StringUtils.wrapperSingleQuote(codes.getProject().getVersion()));
+		map.put("groupId", StringUtils
+				.wrapperSingleQuote(codes.getProject().getGroupId()));
+		map.put("version", StringUtils
+				.wrapperSingleQuote(codes.getProject().getVersion()));
 		map.put("name", codes.getProject().getName());
-		String buildGradle = codes.getProject().getBaseDir() + "/" + codes.getProject().getName() + "/build.gradle";
-		String readMe = codes.getProject().getBaseDir() + "/" + codes.getProject().getName() + "/README.md";
-		BeetlUtil.produce(codes.getProject().getTemplate(), "boot.template", buildGradle, map);
-		BeetlUtil.produce(codes.getProject().getTemplate(), "readme.template", readMe, map);
+		String buildGradle =
+				codes.getProject().getBaseDir() + "/" + codes.getProject()
+						.getName() + "/build.gradle";
+		String readMe =
+				codes.getProject().getBaseDir() + "/" + codes.getProject()
+						.getName() + "/README.md";
+		BeetlUtil.produce(codes.getProject().getTemplate(), "boot.template",
+				buildGradle, map);
+		BeetlUtil.produce(codes.getProject().getTemplate(), "readme.template",
+				readMe, map);
 	}
 
 	protected void copyConfig() throws IOException {
 		String configTemplate = codes.getProject().getConfig();
-		String projectConfig = codes.getProject().getBaseDir() + "/" + codes.getProject().getName() + "/docs";
+		String projectConfig =
+				codes.getProject().getBaseDir() + "/" + codes.getProject()
+						.getName() + "/docs";
 		FileUtil.copyDir(configTemplate, projectConfig);
 	}
 
