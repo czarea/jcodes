@@ -13,7 +13,8 @@
     <change-notes>
         <![CDATA[
             <ul>1. update template file</ul>
-            <ul>2. primaryKey to entity</ul>
+            <ul>2. add primary key column to Table entity</ul>
+            <ul>3. fix bug</ul>
         ]]>
     </change-notes>
     <idea-version since-build="141.0"/>

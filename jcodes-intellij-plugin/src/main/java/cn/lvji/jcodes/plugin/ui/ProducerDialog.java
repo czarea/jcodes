@@ -81,9 +81,10 @@ public class ProducerDialog extends JDialog {
 				long start = System.currentTimeMillis();
 				producer.produceCodes(config);
 				Messages.showInfoMessage(
-						"成功生成代码! 耗时：" + (System.currentTimeMillis() - start),
-						"Success!");
-				log.info("成功生成代码! 耗时：" + (System.currentTimeMillis() - start));
+						"成功生成代码! 耗时：" + (System.currentTimeMillis() - start)
+								+ "ms", "Success!");
+				log.info("成功生成代码! 耗时：" + (System.currentTimeMillis() - start)
+						+ "ms");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
