@@ -44,6 +44,8 @@ public class TableExtractor {
 					remarks = getOracleTableComments(table, conn);
 				}
 
+				result.setComment(remarks);
+
 				if (tableName.equals(table)) {
 					ResultSet columnResultSet = conn.getMetaData()
 							.getColumns(null, getSchema(conn),

@@ -19,10 +19,6 @@ intellij {
     sameSinceUntilBuild false
 }
 
-task abc << {
-    println intellijPublishToken
-}
-
 publishPlugin {
     token intellijPublishToken
 }
