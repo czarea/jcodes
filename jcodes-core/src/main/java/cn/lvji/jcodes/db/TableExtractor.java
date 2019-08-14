@@ -25,7 +25,7 @@ public class TableExtractor {
 			String cataLog = conn.getCatalog();
 			dbmd = conn.getMetaData();
 			ResultSet resultSet = dbmd
-					.getTables(null, cataLog, table, new String[]{"TABLE"});
+					.getTables(cataLog, cataLog, table, new String[]{"TABLE"});
 			ResultSet indexResultSet = dbmd
 					.getIndexInfo(null, cataLog, table, false, true);
 			getTableIndexs(result, indexResultSet);
@@ -48,7 +48,7 @@ public class TableExtractor {
 
 				if (tableName.equals(table)) {
 					ResultSet columnResultSet = conn.getMetaData()
-							.getColumns(null, getSchema(conn),
+							.getColumns(cataLog, getSchema(conn),
 									tableName.toUpperCase(), "%");
 					getTableColumns(result, columnResultSet, conn);
 				}

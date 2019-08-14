@@ -5,6 +5,7 @@ import cn.lvji.order.garden.vo.Grid;
 import cn.lvji.order.garden.vo.Response;
 import @{package}.entity.@{table.className};
 import @{package}.service.@{table.className}Service;
+import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,6 +52,7 @@ public class @{table.className}Controller {
 
     @PutMapping("/pt/@{utils.toLowerCaseFirst(table.className)}")
     public Response<Void> update(@RequestBody @{table.className} param){
+    	param.setUpdateTime(new Date());
         @{utils.toLowerCaseFirst(table.className)}ServiceImpl.saveOrUpdate(param);
         return Response.SUCCESS;
     }

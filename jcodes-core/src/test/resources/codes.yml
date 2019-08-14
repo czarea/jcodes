@@ -9,11 +9,14 @@ project:
   version: 1.0
   module: pay
 template:
-  dir: D:\lvji_git\jcodes\templates\java\order
+  dir: D:\lvji_git\jcodes\templates\java\garden
   outPath: D:/codes/test2/bb
   basePackage: cn.lvji.order.garden
   tables:
-    - t_time_weight
+    - t_distributor
+    - t_dms_order_title
+    - t_dms_order_title_view
+    - t_order_stat
   prefixes: t_
   keys:
     module: zzx
@@ -21,7 +24,7 @@ template:
 db:
   userName: lvji
   password: L@#$j
-  database: batch
+  database: data_sync
   url: jdbc:mysql://192.168.32.88:3306/batch?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
   driverClass: com.mysql.cj.jdbc.Driver
 beetl:
