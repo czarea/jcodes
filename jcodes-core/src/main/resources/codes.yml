@@ -1,7 +1,6 @@
-gradleHome: E:/gradle/gradle-4.6
-author: zhouzx
+author: xxx
 project:
-    baseDir: D:/codes/test2
+    baseDir: D:\codes\test
     config: D:\lvji_git\jcodes\config
     template: D:\lvji_git\jcodes\templates
     name: order-garden
@@ -10,23 +9,14 @@ project:
     module: pay
 template:
     dir: D:\lvji_git\jcodes\templates\java\guide
-    outPath: D:/codes/test2/bb
+    out-path: D:\codes\out
     basePackage: cn.lvji.order.garden
     tables:
-        - t_scenic_type_rate
-        - t_scenic_month_sales
+        - xxx
     prefixes: t_
-    keys:
-        module: zzx
-        day: abc
 db:
-    userName: lvji
-    password: L@#$j
+    userName: xxx
+    password: xxx
     database: eolinker
-    url: jdbc:mysql://192.168.32.88:3306/batch?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
+    url: jdbc:mysql://192.168.32.88:3306/xxx?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
     driverClass: com.mysql.cj.jdbc.Driver
-beetl:
-    statementStart: "#"
-    statementEnd: "#"
-    placeholderStart: "@{"
-    placeholderEnd: "}"

@@ -1,32 +1,30 @@
 # jcodes
 
-#### 介绍
+## 介绍
 代码生成工厂
 
-#### 软件架构
+## 软件架构
 
 ![images](./docs/jcodes-mind.png)
 
 
-#### 软件依赖
+## 软件依赖
 
 1. beetl（模版生成）
 2. jdbc（获取数据库连接）
 3. snakeyaml（配置文件）
 
-#### 源码使用说明
+## 源码使用说明
 
 1. 配置codes.yml,配置样例
 
 ```
-#gradle路径
-gradleHome: E:/gradle/gradle-4.6
 #作者
-author: zhouzx
+author: xxx
 #生成项目配置
 project:
     #生成的项目目标目录
-    baseDir: D:/codes/test
+    baseDir: D:\codes\test
     #项目配置文件的来源目录
     config: D:\lvji_git\jcodes\config
     #模板文件的来源目录
@@ -44,14 +42,15 @@ template:
     #模板文件的来源目录,请注意分隔符必须是反斜杠
     dir: D:\lvji_git\jcodes\templates\java\guide
     #生成的代码目标目录
-    outPath: D:/codes/test2/bb
+    outPath: D:\codes\test\out
     #包名
     basePackage: cn.lvji.order
     #需要生成的业务表
     tables:
-        - eo_api
-        - eo_api_cache
+        - xxx
+        - xxx
     prefixes: eo_
+    #添加自己个性的key
     keys:
         module: zzx
         day: abc
@@ -62,17 +61,35 @@ db:
     database: xxx
     url: jdbc:mysql://192.168.32.88:3306/xxx?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
     driverClass: com.mysql.cj.jdbc.Driver
-beetl:
-    statementStart: "#"
-    statementEnd: "#"
-    placeholderStart: "@{"
-    placeholderEnd: "}"
+```
+
+上面配置可能会觉得很复杂，一般我们只使用生成代码的就可以使用如下配置即可：
+```
+author: xxx
+template:
+  dir: D:\lvji_git\jcodes\templates\java\garden
+  outPath: D:\codes\test\out
+  basePackage: cn.lvji.order.garden
+  tables:
+    - t_distributor
+    - t_dms_order_title
+    - t_dms_order_title_view
+    - t_order_stat
+  prefixes: t_
+
+db:
+  userName: xxx
+  password: xxx
+  database: xxx
+  url: jdbc:mysql://192.168.32.88:3306/batch?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
+  driverClass: com.mysql.cj.jdbc.Driver
+
 ```
 
 2. 配置模版文件，项目中有模版文件样例，在templates/java/guide目录下
 3. 运行Bootstrap类
 
-#### 脚本使用说明
+## 脚本使用说明
 
 ```
 参数：
@@ -87,7 +104,7 @@ beetl:
 1. windows系统下运行bin/jcodes.bat p pj
 2. linux系统下运行bin/jcodes.sh p pj
 
-#### idea插件使用说明
+## idea插件使用说明
 
 1. IDE中安装项目打成的插件包
 2. ALT+S快捷键或对应选项卡界面选中运行jcodes插件

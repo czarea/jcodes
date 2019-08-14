@@ -17,22 +17,22 @@ public class @{table.className} extends Model<@{table.className}> {
 
 		private static final long serialVersionUID = 1L;
 
-	//<editor-fold desc="properties">
+		//<editor-fold desc="properties">
 	# for(column in table.columns){ #
 
 		# if(column.pk) { #
 		@TableId(value = "@{utils.toLowerCase(column.columnName)}", type=IdType.AUTO)
 		# } else { #
-	/**
-	 * @{column.remarks}
-	 */
+		/**
+		 * @{column.remarks}
+		 */
 			# if(utils.toLowerCase(column.columnName)!=utils.toLowerCaseFirst(column.columnJavaName) ) {#
 		@TableField(value = "@{utils.toLowerCase(column.columnName)}")
 			# } #
 		# } #
 		private @{column.javaType} @{utils.toLowerCaseFirst(column.columnJavaName)};
     # } #
-	//</editor-fold>
+		//</editor-fold>
 
 	# for(column in table.columns){ #
 	# if(column.pk) { #
