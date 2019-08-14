@@ -106,9 +106,14 @@ db:
 
 ## idea插件使用说明
 
-1. IDE中安装项目打成的插件包
+1. 自己打包生成idea安装包：
+```
+:jcodes-intellij-plugin:clean buildPlugn
+```
+在build/distributions/下找到zip安装包
+2. idea plugins marketplace搜索jcodes安装
 2. ALT+S快捷键或对应选项卡界面选中运行jcodes插件
 
 ![images](./docs/jcodes.png)
 
-3. 根据本地配置的codes.yml,生成对应项目or代码
+3. 下载source下的模版文件，修改codes.yml，点击生成代码
