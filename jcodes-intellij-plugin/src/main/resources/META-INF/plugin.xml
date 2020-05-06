@@ -1,32 +1,31 @@
 <idea-plugin>
-    <id>cn.lvji</id>
-    <name>jcodes</name>
-    <version>1.3</version>
-    <description>
+  <id>com.czarea</id>
+  <name>jcodes</name>
+  <version>1.4</version>
+  <description>
         <![CDATA[
             <html>
                 producer project or codes from template<br>
                 <a href="https://github.com/zhouzx23/jcodes.git">source code</a>
             </html>
         ]]>
-    </description>
-    <change-notes>
+  </description>
+  <change-notes>
         <![CDATA[
-            <ul>1. Simplified code</ul>
-            <ul>2. Fix bug</ul>
+            <ul>1. add new template code</ul>
+            <ul>2. Fix bug with mac os</ul>
         ]]>
-    </change-notes>
-    <idea-version since-build="141.0"/>
-    <vendor email="363851356@qq.com">zhouzx</vendor>
-    <depends>com.intellij.modules.lang</depends>
+  </change-notes>
+  <idea-version since-build="141.0"/>
+  <vendor email="zhouzx23@gmail.com">zhouzx</vendor>
+  <depends>com.intellij.modules.lang</depends>
 
-    <actions>
-        <group id="jcodes" text="jcodes" description="producer">
-            <add-to-group group-id="CodeMenu" anchor="last"/>
-            <action id="produce" class="cn.czarea.jcodes.plugin.action.JcodesAction" text="jcodes"
-                    description="创建项目|生成代码">
-                <keyboard-shortcut keymap="$default" first-keystroke="alt s"/>
-            </action>
-        </group>
-    </actions>
+  <actions>
+    <group id="jcodes" text="jcodes" description="producer">
+      <add-to-group group-id="CodeMenu" anchor="last"/>
+      <action id="produce" class="com.czarea.jcodes.plugin.action.JcodesAction" text="jcodes" description="创建项目|生成代码">
+        <keyboard-shortcut keymap="$default" first-keystroke="alt s"/>
+      </action>
+    </group>
+  </actions>
 </idea-plugin>

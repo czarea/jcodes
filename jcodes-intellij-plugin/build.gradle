@@ -4,8 +4,8 @@ plugins {
 
 apply plugin: 'org.jetbrains.intellij'
 
-group 'cn.lvji'
-version '1.2'
+group 'com.czarea'
+version '1.4'
 
 dependencies {
     compile project(":jcodes-core")

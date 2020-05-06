@@ -57,3 +57,4 @@ logs/
 */.restart
 /sync/*.pyc
 /sync/*.dat
+/jcodes-core/out/

@@ -1,22 +1,22 @@
-author: xxx
+author: zhouzx
 project:
-    baseDir: D:\codes\test
-    config: D:\lvji_git\jcodes\config
-    template: D:\lvji_git\jcodes\templates
-    name: order-garden
-    groupId: cn.lvji
-    version: 1.0
-    module: pay
+  baseDir: /Users/zhouzx/jcodes
+  config: /Users/zhouzx/java_projects/jcodes/config
+  template: /Users/zhouzx/java_projects/jcodes/templates
+  name: kll-push
+  groupId: com.ssjm
+  version: 1.0
+  module: push
 template:
-    dir: D:\lvji_git\jcodes\templates\java\guide
-    out-path: D:\codes\out
-    basePackage: cn.lvji.order.garden
-    tables:
-        - xxx
-    prefixes: t_
+  dir: /Users/zhouzx/java_projects/jcodes/templates/java/guide
+  out-path: /Users/zhouzx/jcodes
+  basePackage: com.ssjm.kll.push
+  tables:
+    - t_live_show
+  prefixes: t_
 db:
-    userName: xxx
-    password: xxx
-    database: eolinker
-    url: jdbc:mysql://192.168.32.88:3306/xxx?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
-    driverClass: com.mysql.cj.jdbc.Driver
+  userName: dev
+  password: abc123
+  database: live
+  url: jdbc:mysql://192.168.0.23:3306/live?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
+  driverClass: com.mysql.cj.jdbc.Driver

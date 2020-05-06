@@ -2,8 +2,8 @@ plugins {
     id "com.github.johnrengelman.shadow" version "4.0.4"
 }
 
-group 'cn.lvji'
-version '1.0'
+group 'com.czarea'
+version '1.4'
 
 repositories {
     mavenCentral()
@@ -12,7 +12,7 @@ repositories {
 ext {
     beetl = "2.9.7"
     snakeyaml = "1.23"
-    mysql = "6.0.6"
+    mysql = "8.0.11"
     mainClassName = "cn.lvji.jcodes.Bootstrap"
 }
 
@@ -20,8 +20,7 @@ mainClassName = "cn.lvji.jcodes.Bootstrap"
 
 jar {
     manifest {
-        attributes("Main-Class": "${mainClassName}",
-                "Implementation-Title": "Gradle")
+        attributes("Main-Class": "${mainClassName}", "Implementation-Title": "Gradle")
     }
 }
 

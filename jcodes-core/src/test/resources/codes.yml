@@ -1,18 +1,16 @@
 author: zhouzx
 template:
-  dir: D:\lvji_git\jcodes\templates\java\garden
-  outPath: D:\codes\test2\out
-  basePackage: cn.lvji.order.garden
+  dir: /Users/zhouzx/java_projects/jcodes/templates/java/new
+  outPath: /Users/zhouzx/jcodes
+  commonPackage: com.ssjm.kll.common
+  basePackage: com.ssjm.kll.push.server
   tables:
-    - t_distributor
-    - t_dms_order_title
-    - t_dms_order_title_view
-    - t_order_stat
+    - t_live_show
   prefixes: t_
 
 db:
-  userName: lvji
-  password: L@#$j
-  database: data_sync
-  url: jdbc:mysql://192.168.32.88:3306/batch?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
+  userName: dev
+  password: abc123
+  database: live
+  url: jdbc:mysql://192.168.0.23:3306/live?autoReconnect=true&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&useSSL=false
   driverClass: com.mysql.cj.jdbc.Driver

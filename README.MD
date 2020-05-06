@@ -23,53 +23,56 @@
 author: xxx
 #生成项目配置
 project:
-    #生成的项目目标目录
-    baseDir: D:\codes\test
-    #项目配置文件的来源目录
-    config: D:\lvji_git\jcodes\config
-    #模板文件的来源目录
-    template: D:\lvji_git\jcodes\templates
-    #项目名
-    name: lvji-codes-test
-    #坐标
-    groupId: cn.lvji
-    #版本号
-    version: 1.0
-    #模块
-    module: pay
+  #生成的项目目标目录
+  baseDir: /Users/zhouzx/xxx
+  #项目配置文件的来源目录
+  config: /Users/zhouzx/config
+  #模板文件的来源目录
+  template: /Users/zhouzx/templates
+  #项目名
+  name: lvji-codes-test
+  #坐标
+  groupId: com.czarea
+  #版本号
+  version: 1.0
+  #模块
+  module: pay
 #生成业务代码配置
 template:
-    #模板文件的来源目录,请注意分隔符必须是反斜杠
-    dir: D:\lvji_git\jcodes\templates\java\guide
-    #生成的代码目标目录
-    outPath: D:\codes\test\out
-    #包名
-    basePackage: cn.lvji.order
-    #需要生成的业务表
-    tables:
-        - xxx
-        - xxx
-    prefixes: eo_
-    #添加自己个性的key
-    keys:
-        module: zzx
-        day: abc
+  #模板文件的来源目录
+  dir: /Users/zhouzx/
+  #生成的代码目标目录
+  outPath: /Users/zhouzx/jcodes/out
+  ## 公共包名（微服务）
+  commonPackage: com.czarea.xxx.common
+  #包名
+  basePackage: com.czarea.order
+  #需要生成的业务表
+  tables:
+      - xxx
+      - xxx
+  prefixes: eo_
+  #添加自己个性的key
+  keys:
+    module: zzx
+    day: abc
 #数据库配置
 db:
-    userName: xxx
-    password: xxx
-    database: xxx
-    url: jdbc:mysql://192.168.32.88:3306/xxx?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
-    driverClass: com.mysql.cj.jdbc.Driver
+  userName: xxx
+  password: xxx
+  database: xxx
+  url: jdbc:mysql://127.0.0.1:3306/xxx?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
+  driverClass: com.mysql.cj.jdbc.Driver
 ```
 
 上面配置可能会觉得很复杂，一般我们只使用生成代码的就可以使用如下配置即可：
 ```
 author: xxx
 template:
-  dir: D:\lvji_git\jcodes\templates\java\garden
-  outPath: D:\codes\test\out
-  basePackage: cn.lvji.order.garden
+  dir: /Users/zhouzx/java_projects/jcodes/templates/new
+  outPath: /Users/zhouzx/jcodes/out
+  commonPackage: com.czarea.xxx.common
+  basePackage: com.czarea.order.garden
   tables:
     - t_distributor
     - t_dms_order_title
@@ -81,7 +84,7 @@ db:
   userName: xxx
   password: xxx
   database: xxx
-  url: jdbc:mysql://192.168.32.88:3306/batch?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
+  url: jdbc:mysql://192.168.32.88:3306/xxx?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
   driverClass: com.mysql.cj.jdbc.Driver
 
 ```
