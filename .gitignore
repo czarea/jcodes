@@ -16,7 +16,6 @@ Thumbs.db
 *.iso
 *.rar
 *.tar
-*.zip
 gradle.properties
 .gradle
 /build/
