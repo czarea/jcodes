@@ -3,7 +3,7 @@ package @{package}.service;
 import @{commonPackage}.vo.Grid;
 import @{commonPackage}.vo.Response;
 import @{package}.entity.@{table.className};
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import @{package}.vo.@{table.className}VO;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 
@@ -13,6 +13,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface @{table.className}Service extends IService<@{table.className}> {
 
-    Response<Grid<@{table.className}>> list(Page<@{table.className}> page, @{table.className} @{utils.toLowerCaseFirst(table.className)});
+    Response<Grid<@{table.className}>> page(@{table.className}VO @{utils.toLowerCaseFirst(table.className)});
 
 }

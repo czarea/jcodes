@@ -15,42 +15,41 @@ import java.util.Date;
 @TableName(value = "@{table.tableName}")
 public class @{table.className} extends Model<@{table.className}> {
 
-		private static final long serialVersionUID = 1L;
-
-		//<editor-fold desc="properties">
+	private static final long serialVersionUID = 1L;
+	//<editor-fold desc="properties">
 	# for(column in table.columns){ #
 
 		# if(column.pk) { #
-		@TableId(value = "@{utils.toLowerCase(column.columnName)}", type=IdType.AUTO)
+    @TableId(value = "@{utils.toLowerCase(column.columnName)}", type=IdType.AUTO)
 		# } else { #
-		/**
-		 * @{column.remarks}
-		 */
+	/**
+	 * @{column.remarks}
+	 */
 			# if(utils.toLowerCase(column.columnName)!=utils.toLowerCaseFirst(column.columnJavaName) ) {#
-		@TableField(value = "@{utils.toLowerCase(column.columnName)}")
+    @TableField(value = "@{utils.toLowerCase(column.columnName)}")
 			# } #
 		# } #
-		private @{column.javaType} @{utils.toLowerCaseFirst(column.columnJavaName)};
+    private @{column.javaType} @{utils.toLowerCaseFirst(column.columnJavaName)};
     # } #
-		//</editor-fold>
+	//</editor-fold>
 
 	# for(column in table.columns){ #
 	# if(column.pk) { #
 		@Override
-		protected Serializable pkVal() {
-			return @{utils.toLowerCase(column.columnName)};
-		}
+	protected Serializable pkVal() {
+		return @{utils.toLowerCase(column.columnName)};
+	}
 	# } #
 	# } #
 
     # for(column in table.columns){ #
-		public @{column.javaType} get@{utils.toUpperCaseFirst(column.columnJavaName)}() {
-			return @{utils.toLowerCaseFirst(column.columnJavaName)};
-		}
+	public @{column.javaType} get@{utils.toUpperCaseFirst(column.columnJavaName)}() {
+		return @{utils.toLowerCaseFirst(column.columnJavaName)};
+	}
 
-		public void set@{utils.toUpperCaseFirst(column.columnJavaName)}(@{column.javaType} @{utils.toLowerCaseFirst(column.columnJavaName)}) {
-			this.@{utils.toLowerCaseFirst(column.columnJavaName)} = @{utils.toLowerCaseFirst(column.columnJavaName)};
-		}
+	public void set@{utils.toUpperCaseFirst(column.columnJavaName)}(@{column.javaType} @{utils.toLowerCaseFirst(column.columnJavaName)}) {
+    	this.@{utils.toLowerCaseFirst(column.columnJavaName)} = @{utils.toLowerCaseFirst(column.columnJavaName)};
+	}
 	# } #
 
 	@Override

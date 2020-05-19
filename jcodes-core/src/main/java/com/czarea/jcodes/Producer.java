@@ -80,6 +80,10 @@ public class Producer {
         codes.getTemplate().getKeys().put("timestamp", time.toString());
         codes.getTemplate().getKeys().put("time", time.toLocalTime());
         codes.getTemplate().getKeys().put("date", time.toLocalDate());
+        StringBuilder outputPath = new StringBuilder(codes.getTemplate().getOutPath());
+
+        delDir(outputPath.toString());
+
 
         CodesDataSource.getInstance().init(codes);
         List<String> tables = codes.getTemplate().getTables();
@@ -113,7 +117,7 @@ public class Producer {
         });
 
         String os = System.getProperty("os.name");
-        StringBuilder outputPath = new StringBuilder(codes.getTemplate().getOutPath());
+
         String basePackage = codes.getTemplate().getBasePackage();
         if (!StringUtils.isEmpty(basePackage)) {
             outputPath.append(File.separator).append(basePackage.replaceAll("\\.", "/"));
@@ -125,6 +129,29 @@ public class Producer {
         if (os.toLowerCase().contains("mac os")) {
             Runtime.getRuntime().exec("open " + outputPath);
         }
+    }
+
+    private boolean delDir(String filePath) {
+        boolean flag = true;
+        if (filePath != null) {
+            File file = new File(filePath);
+            if (file.exists()) {
+                File[] files = file.listFiles();
+                for (File f : files) {
+                    if (f.isFile()) {
+                        f.delete();
+                    }
+                    if (f.isDirectory()) {
+                        String fpath = f.getPath();
+                        delDir(fpath);
+                        f.delete();
+                    }
+                }
+            }
+        } else {
+            flag = false;
+        }
+        return flag;
     }
 
     /**
