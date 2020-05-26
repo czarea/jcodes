@@ -4,12 +4,14 @@ import @{package}.entity.@{table.className};
 import com.ssjm.kll.common.vo.PageVO;
 import java.util.Date;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  *
  * @author @{author}
  */
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class @{table.className}VO extends PageVO<@{table.className}> {
 
 	//<editor-fold desc="properties">
