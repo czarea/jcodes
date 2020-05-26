@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
  * @author zhouzx
  */
 public class StringUtils {
+
     /**
      * 是否为空
      *
@@ -163,6 +164,19 @@ public class StringUtils {
         return result;
     }
 
+    public static String toCable(String sqlName) {
+        String[] strs = sqlName.toLowerCase().split("_");
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < strs.length; i++) {
+            if (i == 0) {
+                result.append(strs[i].toLowerCase());
+            } else {
+                result.append("-").append(strs[i].toLowerCase());
+            }
+        }
+        return result.toString();
+    }
+
 
     public static boolean contains(String str, String... keywords) {
         if (str == null) {
@@ -193,9 +207,6 @@ public class StringUtils {
 
     /**
      * 为空
-     *
-     * @param str
-     * @return
      */
     public static boolean isEmpty(String str) {
         return str == null || "".equals(str);
@@ -203,9 +214,6 @@ public class StringUtils {
 
     /**
      * 不为空
-     *
-     * @param str
-     * @return
      */
     public static boolean isNotEmpty(String str) {
         return !isEmpty(str);
@@ -213,9 +221,6 @@ public class StringUtils {
 
     /**
      * 转大写
-     *
-     * @param instr
-     * @return
      */
     public static String toUpperCase(String instr) {
         return instr == null ? instr : instr.toUpperCase();
@@ -223,9 +228,6 @@ public class StringUtils {
 
     /**
      * 转小写
-     *
-     * @param instr
-     * @return
      */
     public static String toLowerCase(String instr) {
         return instr == null ? instr : instr.toLowerCase();
@@ -234,9 +236,6 @@ public class StringUtils {
 
     /**
      * 首字母大写 ,其余不变
-     *
-     * @param str
-     * @return
      */
     public static String toUpperCaseFirst(String str) {
         if (str == null) {
@@ -251,9 +250,6 @@ public class StringUtils {
 
     /**
      * 首字母小写 ,其余不变
-     *
-     * @param str
-     * @return
      */
     public static String toLowerCaseFirst(String str) {
         if (str == null) {
@@ -269,9 +265,6 @@ public class StringUtils {
     /**
      * 不会抛NullPointerException 的trim() <br>
      * 传入null会返回null
-     *
-     * @param str
-     * @return
      */
     public static String trim(String str) {
         return str == null ? null : str.trim();
@@ -280,9 +273,6 @@ public class StringUtils {
     /**
      * 过滤 ;当instr==null时返回长度为0的""; <br>
      * 与 nvl(...)系的区别在于只处理null ,不处理长度为0的"";
-     *
-     * @param instr
-     * @return
      */
     public static String nvl(String instr) {
         return nvl(instr, "");
@@ -291,10 +281,6 @@ public class StringUtils {
     /**
      * 过滤 ,把null和长度为0的""当成同一种情况处理; <br>
      * 当instr==null||"".equals(instr)时返回defaultValue ;其它情况返回 instr
-     *
-     * @param instr
-     * @param defaultValue
-     * @return
      */
     public static String nvl(String instr, String defaultValue) {
         return instr == null || "".equals(instr) ? defaultValue : instr;
@@ -302,10 +288,6 @@ public class StringUtils {
 
     /**
      * 比较 str1 和 str2 如果都是 null 或者 str1.equals(str2) 返回 true 表示一样 ;
-     *
-     * @param str1
-     * @param str2
-     * @return
      */
     public static boolean equals(String str1, String str2) {
         if (str1 == null && str2 == null) {
@@ -356,9 +338,6 @@ public class StringUtils {
 
     /**
      * 清除字符串中所有的空格 ,传入null返回null
-     *
-     * @param str
-     * @return
      */
     public static String clear(String str) {
         return clear(str, " ");
@@ -367,9 +346,8 @@ public class StringUtils {
     /**
      * 清除str中出现的所有str2字符序列 直到结果中再也找不出str2为止 str2 == null时 返回str
      *
-     * @param str  原始字符串
+     * @param str 原始字符串
      * @param str2 清除的目标
-     * @return
      */
     public static String clear(String str, String str2) {
         if (str == null) {
@@ -388,11 +366,6 @@ public class StringUtils {
 
     /**
      * 如果str的长度超过了c则取c-sub.length长度,然后拼上sub结尾
-     *
-     * @param str
-     * @param c
-     * @param sub
-     * @return
      */
     public static String suojin(String str, int c, String sub) {
         if (isEmpty(str)) {
@@ -410,10 +383,6 @@ public class StringUtils {
 
     /**
      * 如果str的长度超过了length,取前length位然后拼上...
-     *
-     * @param str
-     * @param length
-     * @return
      */
     public static String suojin(String str, int length) {
         return suojin(str, length, "…");

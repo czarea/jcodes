@@ -13,6 +13,7 @@ import java.util.List;
  * @author zhouzx
  */
 public class Table implements java.io.Serializable, Cloneable {
+
     private String name;
     private String comment;
     private List<Column> columns;
@@ -81,8 +82,6 @@ public class Table implements java.io.Serializable, Cloneable {
 
     /**
      * 获取多少列
-     *
-     * @return
      */
     public int getColumnCount() {
         return columns.size();
@@ -91,8 +90,6 @@ public class Table implements java.io.Serializable, Cloneable {
 
     /**
      * 获取多少列
-     *
-     * @return
      */
     public int getHalfColumnCount() {
         if (columns.size() % 2 == 0) {
@@ -104,8 +101,6 @@ public class Table implements java.io.Serializable, Cloneable {
 
     /**
      * 得到是主键的全部column
-     *
-     * @return
      */
     public List<String> getPkList() {
         return pkColumns;
@@ -113,11 +108,18 @@ public class Table implements java.io.Serializable, Cloneable {
 
     /**
      * 根据sqlName得到的类名称，示例值: UserInfo
-     *
-     * @return
      */
     public String getClassName() {
         return StringUtils.makeAllWordFirstLetterUpperCase(StringUtils.toUnderscoreName(name.replaceFirst(Config.getTablePrefixes(), "")));
+    }
+
+    public String getFclClassName() {
+        String className = getClassName();
+        return StringUtils.firstCharToLowerCase(className);
+    }
+
+    public String getRestfulUri() {
+        return StringUtils.toCable(name.replaceFirst(Config.getTablePrefixes(), ""));
     }
 
     public String getTableName() {

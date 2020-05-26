@@ -5,7 +5,7 @@
         #
         for(column in table.columns){
             if(columnLP.first) {
-              print("        ");
+              print("      ");
             }
             var str = "";
             if(columnLP.index!=1) {
