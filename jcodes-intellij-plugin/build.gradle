@@ -5,7 +5,7 @@ plugins {
 apply plugin: 'org.jetbrains.intellij'
 
 group 'com.czarea'
-version '1.4'
+version '1.5'
 
 dependencies {
     compile project(":jcodes-core")

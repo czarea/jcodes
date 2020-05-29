@@ -11,7 +11,7 @@ import java.io.IOException;
  */
 public class Bootstrap {
 
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) throws Exception {
         Producer producer = new Producer();
         if (args.length <= 0) {
             System.err.println("请携带参数！");

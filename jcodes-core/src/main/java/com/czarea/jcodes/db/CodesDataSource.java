@@ -24,7 +24,7 @@ public class CodesDataSource implements DataSource {
 
     private PrintWriter printWriter = new PrintWriter(System.out);
     private static LinkedList<Connection> connections;
-    protected volatile boolean inited = false;
+    protected volatile boolean init = false;
     protected volatile String username;
     protected volatile String password;
     protected volatile String jdbcUrl;
@@ -42,9 +42,6 @@ public class CodesDataSource implements DataSource {
     }
 
     public void init(Codes config) {
-        if (inited) {
-            return;
-        }
         setUsername(config.getDb().getUserName());
         setPassword(config.getDb().getPassword());
         setJdbcUrl(config.getDb().getUrl());
@@ -56,7 +53,7 @@ public class CodesDataSource implements DataSource {
             Connection connectionProxy = proxy(connection);
             connections.add(connectionProxy);
         }
-        inited = true;
+        init = true;
     }
 
 
@@ -93,7 +90,10 @@ public class CodesDataSource implements DataSource {
      */
     @Override
     public Connection getConnection() throws SQLException {
-        if (!connections.isEmpty()) {
+        Connection connection = getDirectConnection();
+        Connection connectionProxy = proxy(connection);
+        return connectionProxy;
+        /*if (!connections.isEmpty()) {
             Connection connection = connections.removeFirst();
             if (connection instanceof Proxy) {
                 return connection;
@@ -106,9 +106,9 @@ public class CodesDataSource implements DataSource {
                 Connection connectionProxy = proxy(connection);
                 return connectionProxy;
             } else {
-                throw new RuntimeException("connnection pool  is busying......");
+                throw new RuntimeException("connection pool  is busying......");
             }
-        }
+        }*/
     }
 
     private Connection proxy(Connection connection) {
@@ -212,12 +212,12 @@ public class CodesDataSource implements DataSource {
         this.initialSize = initialSize;
     }
 
-    public boolean isInited() {
-        return inited;
+    public boolean isInit() {
+        return init;
     }
 
-    public void setInited(boolean inited) {
-        this.inited = inited;
+    public void setInit(boolean init) {
+        this.init = init;
     }
 
     public int getMaxSize() {

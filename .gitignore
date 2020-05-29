@@ -38,6 +38,8 @@ gradle.properties
 *.iws
 *.iml
 *.ipr
+*/out
+*/build
 
 ### NetBeans ###
 nbproject/private/

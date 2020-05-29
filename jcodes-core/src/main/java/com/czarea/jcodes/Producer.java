@@ -37,7 +37,7 @@ public class Producer {
     /**
      * 生产模版项目
      */
-    public void produceProject(String config) throws IOException, InterruptedException {
+    public void produceProject(String config) throws Exception {
         codes = Config.yamlInit(config);
         String projectPath = codes.getProject().getBaseDir() + File.separator + codes.getProject().getName();
         String createProjectResponse = GradleUtil.executeGradleCmd(projectPath, "init");
@@ -58,7 +58,7 @@ public class Producer {
     /**
      * 生产模版代码
      */
-    public void produceCodes() throws IOException {
+    public void produceCodes() throws Exception {
         codes = null;
         codes = Config.yamlInit();
         baseProduceCodes(codes);
@@ -67,12 +67,13 @@ public class Producer {
     /**
      * 生产模版代码
      */
-    public void produceCodes(String config) throws IOException {
+    public void produceCodes(String config) throws Exception {
+        codes = null;
         codes = Config.yamlInit(config);
         baseProduceCodes(codes);
     }
 
-    private void baseProduceCodes(Codes codes) throws IOException {
+    private void baseProduceCodes(Codes codes) throws Exception {
         codes.getTemplate().getKeys().put("package", codes.getTemplate().getBasePackage());
         codes.getTemplate().getKeys().put("commonPackage", codes.getTemplate().getCommonPackage());
         codes.getTemplate().getKeys().put("author", codes.getAuthor());
@@ -83,7 +84,6 @@ public class Producer {
         StringBuilder outputPath = new StringBuilder(codes.getTemplate().getOutPath());
 
         delDir(outputPath.toString());
-
 
         CodesDataSource.getInstance().init(codes);
         List<String> tables = codes.getTemplate().getTables();
@@ -98,23 +98,31 @@ public class Producer {
         }
 
         if (tables == null || tables.isEmpty()) {
-            try (Connection conn = DATA_SOURCE.getConnection()) {
+            Connection conn = null;
+            try {
+                conn = DATA_SOURCE.getConnection();
                 String dbName = conn.getCatalog();
                 tables = TableExtractor.getAllTables(dbName);
             } catch (SQLException e) {
                 e.printStackTrace();
+            } finally {
+                conn.close();
             }
         }
 
         assert tables != null;
-        tables.forEach(item -> {
+        for (int i = 0; i < tables.size(); i++) {
+            String item = tables.get(i);
             Table table = TableExtractor.getTable(item);
+            if (table.getName() == null) {
+                continue;
+            }
             try {
                 produceFile(codes.getTemplate().getDir(), codes.getTemplate().getOutPath(), table);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        });
+        }
 
         String os = System.getProperty("os.name");
 
@@ -213,14 +221,14 @@ public class Producer {
         new Thread(() -> {
             String createDirsResponse = null;
             try {
-                createDirsResponse = GradleUtil
-                    .executeGradleCmd(projectPath, "createDirs");
+                createDirsResponse = GradleUtil.executeGradleCmd(projectPath, "createDirs");
                 System.out.println(createDirsResponse);
-                latch.countDown();
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (InterruptedException e) {
                 e.printStackTrace();
+            }finally {
+                latch.countDown();
             }
         }).start();
         try {
@@ -260,6 +268,5 @@ public class Producer {
                 .getName() + "/docs";
         FileUtil.copyDir(configTemplate, projectConfig);
     }
-
 
 }

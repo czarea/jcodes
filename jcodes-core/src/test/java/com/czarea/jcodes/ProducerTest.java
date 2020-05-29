@@ -13,7 +13,7 @@ public class ProducerTest {
     }
 
     @Test
-    public void productCodes() throws IOException {
+    public void productCodes() throws Exception {
         Producer producer = new Producer();
         producer.produceCodes();
     }

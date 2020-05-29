@@ -1,7 +1,7 @@
 <idea-plugin>
   <id>cn.lvji</id>
   <name>jcodes</name>
-  <version>1.4</version>
+  <version>1.5</version>
   <description>
         <![CDATA[
             <html>
@@ -12,8 +12,7 @@
   </description>
   <change-notes>
         <![CDATA[
-            <ul>1. add new template code</ul>
-            <ul>2. Fix bug with mac os</ul>
+            <ul>fix bug with get connection</ul>
         ]]>
   </change-notes>
   <idea-version since-build="141.0"/>
