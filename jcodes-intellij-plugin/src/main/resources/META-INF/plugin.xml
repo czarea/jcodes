@@ -13,6 +13,7 @@
   <change-notes>
         <![CDATA[
             <ul>fix bug with get connection</ul>
+            <ul>fix bug with none tables</ul>
         ]]>
   </change-notes>
   <idea-version since-build="141.0"/>

@@ -21,16 +21,6 @@
         #
     </sql>
 
-    <resultMap id="BaseResultMap" type="@{package}.entity.@{table.className}">
-      # for(column in table.columns){ #
-        # if(column.pk) { #
-      <id column="@{column.columnName}" property="@{utils.toLowerCaseFirst(column.columnJavaName)}" />
-        # } else { #
-      <result column="@{column.columnName}" property="@{utils.toLowerCaseFirst(column.columnJavaName)}" />
-        # } #
-        # } #
-    </resultMap>
-
 	  <select id="page" resultType="@{package}.entity.@{table.className}">
       select <include refid="Base_Column_List" /> from @{table.tableName}
       <where>
