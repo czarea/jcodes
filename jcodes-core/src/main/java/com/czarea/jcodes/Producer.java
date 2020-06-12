@@ -124,19 +124,22 @@ public class Producer {
             }
         }
 
-        String os = System.getProperty("os.name");
 
         String basePackage = codes.getTemplate().getBasePackage();
         if (!StringUtils.isEmpty(basePackage)) {
             outputPath.append(File.separator).append(basePackage.replaceAll("\\.", "/"));
         }
-        if (os.toLowerCase().startsWith("win")) {
+
+        if (isMac()) {
+            Runtime.getRuntime().exec("open " + outputPath);
+        } else {
             java.awt.Desktop.getDesktop().open(new File(outputPath.toString()));
         }
+    }
 
-        if (os.toLowerCase().contains("mac os")) {
-            Runtime.getRuntime().exec("open " + outputPath);
-        }
+    private boolean isMac() {
+        String os = System.getProperty("os.name");
+        return os.toLowerCase().contains("mac os");
     }
 
     private boolean delDir(String filePath) {
@@ -183,6 +186,10 @@ public class Producer {
             String outPutFileName = BeetlUtil.getFileName(item.getName(), table.getClassName());
             String relativePath = FileUtil.getRelativePath(templateDir, item.getAbsolutePath());
             String bizPath = relativePath.substring(0, relativePath.lastIndexOf("/"));
+            if (!isMac()) {
+                relativePath = item.getAbsolutePath().substring(templateDir.length());
+                bizPath = relativePath.substring(0, relativePath.lastIndexOf("\\"));
+            }
             StringBuilder outputPath = new StringBuilder(outPath);
             String basePackage = codes.getTemplate().getBasePackage();
             if (!StringUtils.isEmpty(basePackage)) {

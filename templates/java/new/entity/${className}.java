@@ -6,12 +6,16 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import java.util.Date;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
- * @{table.name}
+ * @{table.remarks}
  *
  * @author @{author}
  */
+@Data
+@EqualsAndHashCode(callSuper = false)
 @TableName(value = "@{table.tableName}")
 public class @{table.className} extends Model<@{table.className}> {
 
@@ -33,31 +37,4 @@ public class @{table.className} extends Model<@{table.className}> {
     # } #
 	//</editor-fold>
 
-	# for(column in table.columns){ #
-	# if(column.pk) { #
-		@Override
-	protected Serializable pkVal() {
-		return @{utils.toLowerCase(column.columnName)};
-	}
-	# } #
-	# } #
-
-    # for(column in table.columns){ #
-	public @{column.javaType} get@{utils.toUpperCaseFirst(column.columnJavaName)}() {
-		return @{utils.toLowerCaseFirst(column.columnJavaName)};
-	}
-
-	public void set@{utils.toUpperCaseFirst(column.columnJavaName)}(@{column.javaType} @{utils.toLowerCaseFirst(column.columnJavaName)}) {
-    	this.@{utils.toLowerCaseFirst(column.columnJavaName)} = @{utils.toLowerCaseFirst(column.columnJavaName)};
-	}
-	# } #
-
-	@Override
-	public String toString() {
-		String log = "";
-	# for(column in table.columns){ #
-		log += "[@{utils.toLowerCaseFirst(column.columnJavaName)}:" + get@{utils.toUpperCaseFirst(column.columnJavaName)}() + "]";
-	# } #
-		return log;
-	}
 }
