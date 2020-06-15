@@ -1,4 +1,3 @@
 rootProject.name = 'jcodes'
 include 'jcodes-core'
-include 'jcodes-intellij-plugin'
 

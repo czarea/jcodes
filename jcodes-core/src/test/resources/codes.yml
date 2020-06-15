@@ -1,7 +1,7 @@
 author: zhouzx
 template:
-  dir: /Users/zhouzx/java_projects/jcodes/templates/java/new
-  outPath: /Users/zhouzx/jcodes
+  dir: D:/IdeaProjects/jcodes/templates/java/new
+  outPath: d:/jcodes/a
   commonPackage: com.ssjm.kll.common
   basePackage: com.ssjm.kll.push.server
   tables:
