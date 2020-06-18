@@ -3,14 +3,14 @@ template:
   dir: /Users/zhouzx/java_projects/jcodes/templates/java/new
   outPath: /Users/zhouzx/jcodes
   commonPackage: com.ssjm.kll.common
-  basePackage: com.ssjm.kll.push.server
+  basePackage: com.ssjm.kll.live
   tables:
-    - t_live_show
-  prefixes: t_
+    - t_sys_app_version
+  prefixes: t_sys_
 
 db:
   userName: dev
   password: abc123
   database: live
-  url: jdbc:mysql://192.168.0.23:3306/live?autoReconnect=true&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&useSSL=false
+  url: jdbc:mysql://192.168.0.77:3306/system?autoReconnect=true&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&useSSL=false
   driverClass: com.mysql.cj.jdbc.Driver
