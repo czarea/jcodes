@@ -1,7 +1,7 @@
 <idea-plugin>
   <id>cn.lvji</id>
   <name>jcodes</name>
-  <version>1.6</version>
+  <version>1.8</version>
   <description>
         <![CDATA[
             <html>
@@ -12,7 +12,7 @@
   </description>
   <change-notes>
         <![CDATA[
-            <ul>fix bug with windows</ul>
+            <ul>Add Json File Template File</ul>
             <ul>update template code</ul>
         ]]>
   </change-notes>

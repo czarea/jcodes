@@ -119,7 +119,7 @@ public class Table implements java.io.Serializable, Cloneable {
     }
 
     public String getRestfulUri() {
-        return StringUtils.toCable(name.replaceFirst(Config.getTablePrefixes(), ""));
+        return StringUtils.toSlash(name.replaceFirst(Config.getTablePrefixes(), ""));
     }
 
     public String getTableName() {

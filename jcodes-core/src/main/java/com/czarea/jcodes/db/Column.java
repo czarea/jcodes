@@ -1,7 +1,7 @@
 package com.czarea.jcodes.db;
 
-import com.czarea.jcodes.util.StringUtils;
 import com.czarea.jcodes.util.ColumnUtil;
+import com.czarea.jcodes.util.StringUtils;
 
 /**
  * 表字段
@@ -9,6 +9,7 @@ import com.czarea.jcodes.util.ColumnUtil;
  * @author zhouzx
  */
 public class Column {
+
     private static final long serialVersionUID = 1L;
 
     /**
@@ -72,22 +73,8 @@ public class Column {
     private String remarks;
 
 
-    /**
-     * @param table
-     * @param sqlType
-     * @param sqlTypeName
-     * @param columnName
-     * @param size
-     * @param decimalDigits
-     * @param isPk
-     * @param isNullable
-     * @param isIndexed
-     * @param isUnique
-     * @param defaultValue
-     * @param remarks
-     */
     public Column(Table table, int sqlType, String sqlTypeName, String columnName, int size, int decimalDigits,
-                  boolean isPk, boolean isNullable, boolean isIndexed, boolean isUnique, String defaultValue, String remarks) {
+        boolean isPk, boolean isNullable, boolean isIndexed, boolean isUnique, String defaultValue, String remarks) {
         if (columnName == null) {
             throw new NullPointerException();
         }
@@ -107,7 +94,7 @@ public class Column {
 
     public Column(Column c) {
         this(c.getTable(), c.getSqlType(), c.getSqlTypeName(), c.getColumnName(), c.getSize(), c.getDecimalDigits(), c
-                .isPk(), c.isNullable(), c.isIndexed(), c.isUnique(), c.getDefaultValue(), c.getRemarks());
+            .isPk(), c.isNullable(), c.isIndexed(), c.isUnique(), c.getDefaultValue(), c.getRemarks());
     }
 
 
@@ -210,8 +197,6 @@ public class Column {
 
     /**
      * 得到对应的javaType,如java.lang.String,
-     *
-     * @return
      */
     public String getJavaType() {
         return ColumnUtil.getPreferredJavaType(getSqlType(), getSize(), getDecimalDigits());
@@ -225,7 +210,18 @@ public class Column {
     }
 
     public boolean getCreateInfo() {
-        boolean value = getColumnJavaName().toLowerCase().equals("createtime") || getColumnJavaName().toLowerCase().equals("updatetime");
+        boolean value = getColumnJavaName().toLowerCase().equals("create_time") || getColumnJavaName().toLowerCase().equals("update_time");
         return value;
+    }
+
+    public Object getEg() {
+        String type = getJavaType();
+        if (type.contains("String") || type.contains("Date")) {
+            return "eg";
+        } else if (type.contains("Double") || type.contains("Float")) {
+            return 1.1;
+        } else {
+            return 100;
+        }
     }
 }

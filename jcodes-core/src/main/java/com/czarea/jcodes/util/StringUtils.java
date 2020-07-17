@@ -177,6 +177,19 @@ public class StringUtils {
         return result.toString();
     }
 
+    public static String toSlash(String sqlName) {
+        String[] strs = sqlName.toLowerCase().split("_");
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < strs.length; i++) {
+            if (i == 0) {
+                result.append(strs[i].toLowerCase());
+            } else {
+                result.append("/").append(strs[i].toLowerCase());
+            }
+        }
+        return result.toString();
+    }
+
 
     public static boolean contains(String str, String... keywords) {
         if (str == null) {
