@@ -1,6 +1,8 @@
 package com.czarea.jcodes.util;
 
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.regex.Pattern;
 
 /**
@@ -9,6 +11,9 @@ import java.util.regex.Pattern;
  * @author zhouzx
  */
 public class StringUtils {
+
+    public static final String PATTERN_DATETIME = "yyyy-MM-dd HH:mm:ss";
+    public static final SimpleDateFormat DATETIME_FORMATTER = new SimpleDateFormat(PATTERN_DATETIME);
 
     /**
      * 是否为空
@@ -35,6 +40,11 @@ public class StringUtils {
      */
     public static String wrapperDoubleQuote(String str) {
         return "\"" + str + "\"";
+    }
+
+
+    public static String getCurrentTimestamp() {
+        return DATETIME_FORMATTER.format(new Date());
     }
 
     /**

@@ -1,0 +1,18 @@
+{
+  "type": "object",
+  "properties": {
+  # for(column in table.columns){ #
+      # if( columnLP.last ) { #
+      "@{utils.toUpperCaseFirst(column.columnJavaName)}": {
+          "type": "@{column.type}",
+          "description": "@{column.remarks}"
+      }
+      # } else { #
+      "@{utils.toUpperCaseFirst(column.columnJavaName)}": {
+          "type": "@{column.type}",
+          "description": "@{column.remarks}"
+      },
+      # } #
+  # } #
+  }
+}

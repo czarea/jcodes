@@ -214,12 +214,33 @@ public class Column {
         return value;
     }
 
+    public boolean isNumber() {
+        String type = getJavaType();
+        if (type.contains("String")) {
+            return false;
+        } else if (type.contains("Double") || type.contains("Float")) {
+            return true;
+        } else {
+            return !type.contains("Date");
+        }
+    }
+
+    public String getType() {
+        String type = getJavaType();
+        if (type.equalsIgnoreCase("Date")) {
+            return "datetime";
+        }
+        return type.toLowerCase();
+    }
+
     public Object getEg() {
         String type = getJavaType();
-        if (type.contains("String") || type.contains("Date")) {
+        if (type.contains("String")) {
             return "eg";
         } else if (type.contains("Double") || type.contains("Float")) {
             return 1.1;
+        } else if (type.contains("Date")) {
+            return StringUtils.getCurrentTimestamp();
         } else {
             return 100;
         }

@@ -1,9 +1,17 @@
 {
     # for(column in table.columns){ #
       # if( columnLP.last ) { #
-      '@{utils.toUpperCaseFirst(column.columnJavaName)}':'@{column.eg}' //@{column.remarks}
+      # if( column.number ) { #
+      '@{utils.toUpperCaseFirst(column.columnJavaName)}':@{column.eg} //@{column.remarks},
+      # } else { #
+      '@{utils.toUpperCaseFirst(column.columnJavaName)}':'@{column.eg}' //@{column.remarks},
+      # } #
+      # } else { #
+      # if( column.number ) { #
+      '@{utils.toUpperCaseFirst(column.columnJavaName)}':@{column.eg}, //@{column.remarks}
       # } else { #
       '@{utils.toUpperCaseFirst(column.columnJavaName)}':'@{column.eg}', //@{column.remarks}
+      # } #
       # } #
     # } #
 }
