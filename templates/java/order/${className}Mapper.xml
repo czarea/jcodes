@@ -25,7 +25,7 @@
         # } else { #
       <result column="@{column.columnName}" property="@{utils.toLowerCaseFirst(column.columnJavaName)}" />
         # } #
-        # } #
+      # } #
     </resultMap>
 
 	  <select id="get@{table.className}Page" resultType="@{table.className}">

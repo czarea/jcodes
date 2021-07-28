@@ -4,8 +4,8 @@ package @{package}.service.impl;
 import @{package}.dao.@{table.className}Mapper;
 import @{package}.entity.@{table.className};
 import @{package}.service.@{table.className}Service;
-import cn.lvji.core.vo.Grid;
-import cn.lvji.core.vo.Response;
+import @{commonPackage}.vo.Grid;
+import @{commonPackage}.vo.Response;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import java.util.List;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * 
+ *
  *
  * @author @{author}
  */

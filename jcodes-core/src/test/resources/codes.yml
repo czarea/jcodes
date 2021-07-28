@@ -1,16 +1,16 @@
 author: zhouzx
 template:
-  dir: /Users/zhouzx/java_projects/jcodes/templates/java/new
-  outPath: /Users/zhouzx/jcodes
-  commonPackage: com.ssjm.kll.common
-  basePackage: com.ssjm.kll.live
+  dir: /Users/zhouzx/java_projects/jcodes/templates/java/order
+  outPath: /Users/zhouzx/jcodes/god
+  commonPackage: com.lyy.monitor.core
+  basePackage: com.lyy.monitor.webapp
   tables:
-    - t_sys_app_version
-  prefixes: t_sys_
+    - t_datasource
+  prefixes: t_
 
 db:
-  userName: dev
-  password: abc123
-  database: live
-  url: jdbc:mysql://192.168.0.77:3306/system?autoReconnect=true&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&useSSL=false
+  userName: monitor
+  password: 123456
+  database: monitor
+  url: jdbc:mysql://192.168.101.65:3306/monitor?autoReconnect=true&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
   driverClass: com.mysql.cj.jdbc.Driver

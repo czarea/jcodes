@@ -1,15 +1,14 @@
 package com.czarea.jcodes;
 
-import com.czarea.jcodes.db.Table;
-import com.czarea.jcodes.util.StringUtils;
 import com.czarea.jcodes.config.Config;
 import com.czarea.jcodes.db.CodesDataSource;
+import com.czarea.jcodes.db.Table;
 import com.czarea.jcodes.db.TableExtractor;
 import com.czarea.jcodes.model.Codes;
 import com.czarea.jcodes.template.BeetlUtil;
 import com.czarea.jcodes.util.FileUtil;
 import com.czarea.jcodes.util.GradleUtil;
-
+import com.czarea.jcodes.util.StringUtils;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -124,7 +123,6 @@ public class Producer {
             }
         }
 
-
         String basePackage = codes.getTemplate().getBasePackage();
         if (!StringUtils.isEmpty(basePackage)) {
             outputPath.append(File.separator).append(basePackage.replaceAll("\\.", "/"));
@@ -202,6 +200,7 @@ public class Producer {
             }
             outputPath.append(outPutFileName);
             codes.getTemplate().getKeys().put("className", table.getClassName());
+            codes.getTemplate().getKeys().put("lowerClassName", StringUtils.toLowerCaseFirst(table.getClassName()));
             try {
                 BeetlUtil.produceCodes(table, templateDir, relativePath.substring(1), outputPath.toString(), codes.getTemplate().getKeys());
             } catch (IOException e) {
@@ -234,7 +233,7 @@ public class Producer {
                 e.printStackTrace();
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }finally {
+            } finally {
                 latch.countDown();
             }
         }).start();

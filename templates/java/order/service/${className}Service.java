@@ -2,14 +2,14 @@ package @{package}.service;
 
 
 import @{package}.entity.@{table.className};
-import cn.lvji.order.garden.vo.Grid;
-import cn.lvji.order.garden.vo.Response;
+import @{commonPackage}.vo.Grid;
+import @{commonPackage}.vo.Response;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 
 /**
- * 
+ *
  *
  * @author @{author}
  */

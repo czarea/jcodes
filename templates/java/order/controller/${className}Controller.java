@@ -22,49 +22,49 @@ import org.springframework.web.bind.annotation.RestController;
 public class @{table.className}Controller {
     public class Page extends PageRequest<@{table.className}>{
     }
-    
+
     private @{table.className}Service @{utils.toLowerCaseFirst(table.className)}ServiceImpl;
-    
+
     @Autowired
     private @{table.className}Controller(@{table.className}Service @{utils.toLowerCaseFirst(table.className)}ServiceImpl){
         this.@{utils.toLowerCaseFirst(table.className)}ServiceImpl = @{utils.toLowerCaseFirst(table.className)}ServiceImpl;
     }
-    
+
 
     @PostMapping("/pt/@{utils.toLowerCaseFirst(table.className)}")
     public Response<Void> save(@RequestBody @{table.className} @{utils.toLowerCaseFirst(table.className)}){
-        @{utils.toLowerCaseFirst(table.className)}ServiceImpl.insert(@{utils.toLowerCaseFirst(table.className)});
+        @{utils.toLowerCaseFirst(table.className)}ServiceImpl.save(@{utils.toLowerCaseFirst(table.className)});
         return Response.SUCCESS;
     }
-    
-    
-    @GetMapping("/pt/@{utils.toLowerCaseFirst(table.className)}/{id}")
+
+
+    @GetMapping("/@{table.restfulUri}s/{id}")
     public Response<@{table.className}> get(@PathVariable("id") Long id){
         Response<@{table.className}> res = new Response<>();
-        @{table.className} @{utils.toLowerCaseFirst(table.className)} = @{utils.toLowerCaseFirst(table.className)}ServiceImpl.selectById(id);
+        @{table.className} @{utils.toLowerCaseFirst(table.className)} = @{utils.toLowerCaseFirst(table.className)}ServiceImpl.getById(id);
         res.setData(@{utils.toLowerCaseFirst(table.className)});
         return res;
     }
-    
-    
+
+
     @GetMapping("/pt/@{utils.toLowerCaseFirst(table.className)}/action/search")
     public Response<Grid<@{table.className}>> list(Page request){
         return @{utils.toLowerCaseFirst(table.className)}ServiceImpl.list(request.buildPage(), request.getFilter());
     }
 
-    
-    @PutMapping("/pt/@{utils.toLowerCaseFirst(table.className)}")
+
+    @PutMapping("/@{table.restfulUri}s")
     public Response<Void> update(@RequestBody @{table.className} param){
-        @{utils.toLowerCaseFirst(table.className)}ServiceImpl.insertOrUpdate(param);
+        @{utils.toLowerCaseFirst(table.className)}ServiceImpl.saveOrUpdate(param);
         return Response.SUCCESS;
     }
-    
-    
-    @DeleteMapping("/pv/@{utils.toLowerCaseFirst(table.className)}/{id}")
+
+
+    @DeleteMapping("/@{table.restfulUri}s/{id}")
     public Response<Void> delete(@PathVariable("id") Long id){
-        @{utils.toLowerCaseFirst(table.className)}ServiceImpl.deleteById(id);
+        @{utils.toLowerCaseFirst(table.className)}ServiceImpl.removeById(id);
         return Response.SUCCESS;
     }
-    
-    
+
+
 }

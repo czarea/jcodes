@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.activerecord.Model;
 import java.util.Date;
 
 /**
- * @{table.name}
+ * @{table.name}:@{table.remarks}
  *
  * @author @{author}
  */

@@ -18,5 +18,5 @@ db:
   userName: dev
   password: abc123
   database: live
-  url: jdbc:mysql://192.168.0.23:3306/live?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
+  url: jdbc:mysql://192.168.0.23:3306/live?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC&useSSL=false
   driverClass: com.mysql.cj.jdbc.Driver
