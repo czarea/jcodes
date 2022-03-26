@@ -2,22 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="@{package}.dao.@{table.className}Mapper">
     <sql id="Base_Column_List">
-        #
-        for(column in table.columns){
-            var str = "";
-            if(columnLP.index!=1) {
-                str = str + ",";
-            }
-            str = str + utils.toLowerCase(column.columnName);
-            if(utils.toLowerCase(column.columnName)!=utils.toLowerCaseFirst(column.columnJavaName) ) {
-              str = str + " as " + utils.toLowerCaseFirst(column.columnJavaName);
-            }
-            print(str);
+      #
+      for(column in table.columns){
+              if(columnLP.first) {
+                print("      ");
+                }
+                var str = "";
+                if(columnLP.index!=1) {
+                          str = str + ",";
+                }
+                        str = str + "`"+utils.toLowerCase(column.columnName)+"`";
+                if(utils.toLowerCase(column.columnName)!=utils.toLowerCaseFirst(column.columnJavaName) ) {
+                            str = str + " as " + utils.toLowerCaseFirst(column.columnJavaName);
+                }
+                            print(str);
         }
-        println("");
+              println("");
         #
     </sql>
-
     <resultMap id="BaseResultMap" type="@{table.className}">
       # for(column in table.columns){ #
         # if(column.pk) { #

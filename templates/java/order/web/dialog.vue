@@ -7,7 +7,7 @@
           # if(!column.pk && column.columnName != 'create_time' && column.columnName != 'update_time' ){ #
           <el-row>
             <el-col :span="15">
-              <el-form-item label="@{column.remarks}" prop="name">
+              <el-form-item label="@{column.remarks}" prop="@{utils.toLowerCaseFirst(column.columnJavaName)}">
                 <el-input v-model="@{table.fclClassName}Form.@{utils.toLowerCaseFirst(column.columnJavaName)}" placeholder="请填写@{column.remarks}"></el-input>
               </el-form-item>
             </el-col>

@@ -1,11 +1,10 @@
 package @{package}.controller;
 
-import cn.lvji.core.vo.PageRequest;
-import cn.lvji.core.vo.Grid;
-import cn.lvji.core.vo.Response;
+import @{commonPackage}.vo.PageRequest;
+import @{commonPackage}.vo.Grid;
+import @{commonPackage}.vo.Response;
 import @{package}.entity.@{table.className};
 import @{package}.service.@{table.className}Service;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,15 +22,14 @@ public class @{table.className}Controller {
     public class Page extends PageRequest<@{table.className}>{
     }
 
-    private @{table.className}Service @{utils.toLowerCaseFirst(table.className)}ServiceImpl;
+    private final @{table.className}Service @{utils.toLowerCaseFirst(table.className)}ServiceImpl;
 
-    @Autowired
     private @{table.className}Controller(@{table.className}Service @{utils.toLowerCaseFirst(table.className)}ServiceImpl){
         this.@{utils.toLowerCaseFirst(table.className)}ServiceImpl = @{utils.toLowerCaseFirst(table.className)}ServiceImpl;
     }
 
 
-    @PostMapping("/pt/@{utils.toLowerCaseFirst(table.className)}")
+    @PostMapping("/@{table.restfulUri}s")
     public Response<Void> save(@RequestBody @{table.className} @{utils.toLowerCaseFirst(table.className)}){
         @{utils.toLowerCaseFirst(table.className)}ServiceImpl.save(@{utils.toLowerCaseFirst(table.className)});
         return Response.SUCCESS;
@@ -47,7 +45,7 @@ public class @{table.className}Controller {
     }
 
 
-    @GetMapping("/pt/@{utils.toLowerCaseFirst(table.className)}/action/search")
+    @GetMapping("/@{table.restfulUri}s")
     public Response<Grid<@{table.className}>> list(Page request){
         return @{utils.toLowerCaseFirst(table.className)}ServiceImpl.list(request.buildPage(), request.getFilter());
     }

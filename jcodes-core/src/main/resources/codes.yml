@@ -10,13 +10,16 @@ project:
 template:
   dir: /Users/zhouzx/java_projects/jcodes/templates/java/guide
   out-path: /Users/zhouzx/jcodes
-  basePackage: com.ssjm.kll.push
+  basePackage: com.qushiyum.iot.yutang
   tables:
-    - t_live_show
-  prefixes: t_
+    - yt_ai_rule
+    - yt_ai_rule_condition
+    - yt_ai_rule_action
+    - yt_ai_rule_log
+  prefixes: yt_
 db:
-  userName: dev
-  password: abc123
-  database: live
-  url: jdbc:mysql://192.168.0.23:3306/live?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC&useSSL=false
+  userName: tpsite_test
+  password: YQsrHcsdTjrp5iOm8FV7LlTEZeYptKxB
+  database: tpsite_test
+  url: jdbc:mysql://rm-bp1h3727985hsh3l2bo.mysql.rds.aliyuncs.com/tpsite_test?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&tinyInt1isBit=false&allowMultiQueries=true&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
   driverClass: com.mysql.cj.jdbc.Driver

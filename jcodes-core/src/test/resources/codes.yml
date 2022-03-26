@@ -5,12 +5,15 @@ template:
   commonPackage: com.lyy.monitor.core
   basePackage: com.lyy.monitor.webapp
   tables:
-    - t_datasource
-  prefixes: t_
+    - iot_ai_rule
+    - iot_ai_rule_condition
+    - iot_ai_rule_action
+    - iot_ai_rule_log
+  prefixes: iot_
 
 db:
-  userName: monitor
-  password: 123456
-  database: monitor
-  url: jdbc:mysql://192.168.101.65:3306/monitor?autoReconnect=true&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+  userName: tpsite_test
+  password: YQsrHcsdTjrp5iOm8FV7LlTEZeYptKxB
+  database: tpsite_test
+  url: jdbc:mysql://rm-bp1h3727985hsh3l2bo.mysql.rds.aliyuncs.com/tpsite_test?useSSL=false&useUnicode=true&characterEncoding=utf-8
   driverClass: com.mysql.cj.jdbc.Driver
